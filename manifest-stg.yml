@@ -1,7 +1,7 @@
 ---
 
 applications:
-- name: api-doc
+- name: ccte-docs-stg
   memory: 32M
   disk_quota: 64M
   instances: 1
@@ -9,4 +9,4 @@ applications:
   - nginx_buildpack
   routes:
   - route: api-docs.app.cloud.gov
-  - route: ccte-api-p.app.cloud.gov/docs
+  - route: ccte-api-stg.app.cloud.gov/docs

@@ -17,10 +17,6 @@
   <meta name="msapplication-TileImage" content="https://www.epa.gov/themes/epa_theme/images/favicon-144.png">
   <meta name="application-name" content="US EPA">
   <meta name="msapplication-config" content="https://www.epa.gov/themes/epa_theme/images/ieconfig.xml">
-  <!-- Start - API viewer -->
-  <script src="https://unpkg.com/@stoplight/elements/web-components.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">
-  <!-- End - API viewer -->
   <link rel="apple-touch-icon-precomposed" sizes="196x196" href="https://www.epa.gov/themes/epa_theme/images/favicon-196.png">
   <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://www.epa.gov/themes/epa_theme/images/favicon-152.png">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.epa.gov/themes/epa_theme/images/favicon-144.png">
@@ -167,51 +163,23 @@
 <main id="main" class="main" role="main" tabindex="-1">
   <div class="l-page">
     <div class="l-constrain l-constrain--large">
-      <article class="article">
-        <!-- Start - breadcrumbs -->
-        <nav class="button-group button-group--base" aria-label="Primary tasks">
-          <ul class="button-group__list">
-            <li class="button-group__item">
-              <a href="index.html" class="button-group__link">
-                Home
-              </a>
-            </li>
-            <li class="button-group__item is-active">
-              <a href="chemical.html" class="button-group__link   is-active" aria-current="page">
-                Chemical
-                <span class="visually-hidden">(active)</span>
-              </a>
-            </li>
-            <li class="button-group__item">
-              <a href="hazard.html" class="button-group__link">
-                Hazard
-              </a>
-            </li>
-            <li class="button-group__item">
-              <a href="bioactivity.html" class="button-group__link">
-                Bioactivity
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <!-- End - breadcrumbs -->
-        <div>
-          <!-- layout="stacked" / layout="sidebar" // hideTryIt="false" -->
-          <elements-api
-                  apiDescriptionUrl="chemical.json"
-                  router="hash"
-          />
+      <div class="l-page__header">
+        <div class="l-page__header-first">
+          <div class="web-area-title"></div>
         </div>
-        <p>Learn more about <a href="https://www.epa.gov/aboutepa/about-center-computational-toxicology-and-exposure-ccte">EPA’s Computational Toxicology and Exposure Research.</a></p>
-        <p>Learn more about <a href="https://www.epa.gov/chemical-research#:~:text=EPA%27s%20Safer%20Chemicals%20Research%20is%20transforming%20chemical%20risk-based,objectives%20to%20protect%20human%20health%20and%20the%20environment">EPA’s Chemical Safety Research.</a> </p>
-        <h5>Disclaimer</h5>
-        <p>This resource is a compilation of information sourced from many sites, databases and sources, including U.S. Federal and state sources and international bodies. The data are not reviewed by USEPA - the user must apply judgment in use of the information. You should consult the original scientific paper or data source if possible to ensure an understanding of the context of the data contained in the Dashboard.</p>
-        <p>Reference herein to any specific commercial products, process, or service by trade name, trademark, manufacturer, or otherwise, does not necessarily constitute or imply its endorsement, recommendation, or favoring by the United States Government. The views and opinions of the developers of the site expressed herein do not necessarily state or reflect those of the United States Government, and shall not be used for advertising or product endorsement purposes</p>
-        <p>With respect to documents available from this server, neither the United States Government nor any of their employees, makes any warranty, express or implied, including the warranties of merchantability and fitness for a particular purpose, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness of any information, apparatus, product, or process disclosed, or represents that its use would not infringe privately owned rights.</p>
+        <div class="l-page__header-last">
+        </div>
+      </div>
+<!-- Page contents -->
+      <article class="article">
+
       </article>
+
     </div>
+
   </div>
 </main>
+
 
 <footer class="footer" role="contentinfo">
   <div class="l-constrain">
