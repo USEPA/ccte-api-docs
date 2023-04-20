@@ -9,5 +9,5 @@ applications:
   - nginx_buildpack
   routes:
   #- route: api-docs.app.cloud.gov
-  - route: ccte-api.app.cloud.gov/docs
+  #- route: ccte-api.app.cloud.gov/docs
   - route: api-ccte.epa.gov/docs
