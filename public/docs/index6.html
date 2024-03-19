@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redoc</title>
+    <!-- needed for adaptive design -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+
+    <!--
+    Redoc doesn't change outer page styles
+    -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<!--<redoc spec-url='http://localhost:63342/ccte-api-docs/public/docs/chemical.json' ,-->
+<!--       disable-search="false"></redoc>-->
+<!--<script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"> </script>-->
+
+<!--<style>-->
+<!--    a[href="https://redocly.com/redoc"] {-->
+<!--        opacity: 0;-->
+<!--    }-->
+<!--</style>-->
+<rapi-doc
+        spec-url="chemical.json"
+        show-header = 'true'
+        heading-text = 'CCTE Public APIs'
+        header-color = '#FF791A'
+        fill-request-fields-with-example= 'true'
+        update-route = "false"
+        show-info = 'true'
+        allow-authentication ='true'
+        allow-server-selection = 'false'
+        allow-spec-url-load = 'false'
+        allow-spec-file-load = 'false'
+        allow-spec-file-download = 'false'
+        allow-search = 'false'
+        allow-advanced-search = 'false'
+        allow-api-list-style-selection ='false'
+        theme = 'light'
+        bg-color = '#fff'
+        text-color = '#444'
+        primary-color = '#162e51'
+        font-size = 'largest'
+        show-method-in-nav-bar = 'false'
+        use-path-in-nav-bar = 'false'
+        nav-bg-color = '#f0f0f0'
+        nav-text-color = '#000'
+        nav-active-item-marker = 'colored-block'
+        nav-item-spacing = 'relaxed'
+        layout = 'row'
+        render-style = 'focused'
+        schema-style = 'table'
+        show-components = 'false'
+        allow-try = 'true'
+        show-curl-before-try = "true"
+> </rapi-doc>
+
+<script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+
+</body>
+</html>

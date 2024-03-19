@@ -18,8 +18,9 @@
   <meta name="application-name" content="US EPA">
   <meta name="msapplication-config" content="https://www.epa.gov/themes/epa_theme/images/ieconfig.xml">
   <!-- Start - API viewer -->
-  <script src="https://unpkg.com/@stoplight/elements/web-components.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">
+  <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+  <!--    <script src="https://unpkg.com/@stoplight/elements/web-components.min.js"></script>-->
+  <!--    <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">-->
   <!-- End - API viewer -->
   <link rel="apple-touch-icon-precomposed" sizes="196x196" href="https://www.epa.gov/themes/epa_theme/images/favicon-196.png">
   <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://www.epa.gov/themes/epa_theme/images/favicon-152.png">
@@ -32,17 +33,14 @@
   <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/source-sans-pro/sourcesanspro-regular-webfont.woff2" as="font" crossorigin="anonymous">
   <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/source-sans-pro/sourcesanspro-bold-webfont.woff2" as="font" crossorigin="anonymous">
   <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/merriweather/Latin-Merriweather-Bold.woff2" as="font" crossorigin="anonymous">
-  <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/source-sans-pro/sourcesanspro-regular-webfont.woff2" as="font" crossorigin="anonymous">
-  <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/source-sans-pro/sourcesanspro-bold-webfont.woff2" as="font" crossorigin="anonymous">
-  <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/merriweather/Latin-Merriweather-Bold.woff2" as="font" crossorigin="anonymous">
-  <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/noto-sans-sc/NotoSansSC-Bold.otf" as="font" crossorigin="anonymous">
-  <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/noto-sans-tc/NotoSansTC-Regular.otf" as="font" crossorigin="anonymous">
-  <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/noto-sans-tc/NotoSansTC-Bold.otf" as="font" crossorigin="anonymous">
-  <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/noto-sans-kr/NotoSansKR-Regular.otf" as="font" crossorigin="anonymous">
-  <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/noto-sans-kr/NotoSansKR-Bold.otf" as="font" crossorigin="anonymous">
-  <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/noto-sans-arabic/static/NotoSansArabic/NotoSansArabic-Regular.ttf" as="font" crossorigin="anonymous">
-  <link rel="preload" href="https://www.epa.gov/themes/epa_theme/fonts/noto-sans-arabic/static/NotoSansArabic/NotoSansArabic-Bold.ttf" as="font" crossorigin="anonymous">
-  <link rel="stylesheet" media="all" href="https://www.epa.gov/core/themes/stable/css/system/components/ajax-progress.module.css">
+  <link rel="preload" href="https://www.epa.gov//themes/epa_theme/fonts/noto-sans-sc/NotoSansSC-Bold.otf" as="font" crossorigin="anonymous">
+  <link rel="preload" href="https://www.epa.gov//themes/epa_theme/fonts/noto-sans-tc/NotoSansTC-Regular.otf" as="font" crossorigin="anonymous">
+  <link rel="preload" href="https://www.epa.gov//themes/epa_theme/fonts/noto-sans-tc/NotoSansTC-Bold.otf" as="font" crossorigin="anonymous">
+  <link rel="preload" href="https://www.epa.gov//themes/epa_theme/fonts/noto-sans-kr/NotoSansKR-Regular.otf" as="font" crossorigin="anonymous">
+  <link rel="preload" href="https://www.epa.gov//themes/epa_theme/fonts/noto-sans-kr/NotoSansKR-Bold.otf" as="font" crossorigin="anonymous">
+  <link rel="preload" href="https://www.epa.gov//themes/epa_theme/fonts/noto-sans-arabic/static/NotoSansArabic/NotoSansArabic-Regular.ttf" as="font" crossorigin="anonymous">
+  <link rel="preload" href="https://www.epa.gov//themes/epa_theme/fonts/noto-sans-arabic/static/NotoSansArabic/NotoSansArabic-Bold.ttf" as="font" crossorigin="anonymous">
+  <!--  <link rel="stylesheet" media="all" href="https://www.epa.gov/core/themes/stable/css/system/components/ajax-progress.module.css">-->
   <link rel="stylesheet" media="all" href="https://www.epa.gov/core/themes/stable/css/system/components/autocomplete-loading.module.css">
   <link rel="stylesheet" media="all" href="https://www.epa.gov/core/themes/stable/css/system/components/js.module.css">
   <link rel="stylesheet" media="all" href="https://www.epa.gov/core/themes/stable/css/system/components/sticky-header.module.css">
@@ -61,11 +59,25 @@
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-L8ZB');</script>
   <!-- End Google Tag Manager -->
+  <style>
+    /*rapi-doc::part(section-servers) { !* <<< targets the server div *!*/
+    /*  background: #f0f0f0;*/
+    /*  color:#000;*/
+    /*  margin:0 24px 0 24px;*/
+    /*  border-radius: 5px;*/
+    /*}*/
+    /*rapi-doc::part(label-selected-server) { !* <<< targets selected server label *!*/
+    /*  color: #000;*/
+    /*}*/
 
-  <!-- Begin Pattern Lab (Required for Pattern Lab to run properly) -->
+    .api-contents{
+      padding-top: 5px;
+      padding-right: 50px;
+      padding-bottom: 50px;
+      padding-left: 50px;
+    }
 
-  <!-- End Pattern Lab -->
-
+  </style>
 </head>
 <body class="" id="#top">
 
@@ -88,7 +100,7 @@
     <div class="usa-banner__content usa-accordion__content" id="gov-banner">
       <div class="grid-row grid-gap-lg">
         <div class="usa-banner__guidance tablet:grid-col-6">
-          <img class="usa-banner__icon usa-media-block__img" src="/images/icon-dot-gov.svg" alt="Dot gov">
+          <img class="usa-banner__icon usa-media-block__img" src="https://www.epa.gov/themes/epa_theme/images/icon-dot-gov.svg" alt="Dot gov">
           <div class="usa-media-block__body">
             <p>
               <strong>Official websites use .gov</strong>
@@ -97,7 +109,7 @@
           </div>
         </div>
         <div class="usa-banner__guidance tablet:grid-col-6">
-          <img class="usa-banner__icon usa-media-block__img" src="/images/icon-https.svg" alt="HTTPS">
+          <img class="usa-banner__icon usa-media-block__img" src="https://www.epa.gov/themes/epa_theme/images/icon-https.svg" alt="HTTPS">
           <div class="usa-media-block__body">
             <p>
               <strong>Secure .gov websites use HTTPS</strong>
@@ -152,7 +164,7 @@
       <div class="usa-nav__inner">
         <button class="usa-nav__close" aria-label="Close">
 
-          <svg class="icon icon--nav-close" aria-hidden="true" role="img"><title>Primary navigation</title><use href="/themes/epa_theme/images/sprite.artifact.svg#close"></use></svg>    </button>
+          <svg class="icon icon--nav-close" aria-hidden="true" role="img"><title>Primary navigation</title><use href="https://www.epa.gov/themes/epa_theme/images/sprite.artifact.svg#close"></use></svg>    </button>
         <div class="usa-nav__menu">
 
           <ul class="menu menu--main">
@@ -169,8 +181,9 @@
 
 <main id="main" class="main" role="main" tabindex="-1">
   <div class="l-page">
-    <div class="l-constrain l-constrain--large">
-      <article class="article">
+    <!--        <div class="l-constrain l-constrain&#45;&#45;large">-->
+    <article class="api-contents">
+      <div >
         <!-- Start - breadcrumbs -->
         <nav class="button-group button-group--base" aria-label="Primary tasks">
           <ul class="button-group__list">
@@ -179,9 +192,10 @@
                 Home
               </a>
             </li>
-            <li class="button-group__item">
-              <a href="chemical.html" class="button-group__link">
+            <li class="button-group__item is-active">
+              <a href="chemical.html" class="button-group__link   is-active" aria-current="page">
                 Chemical
+                <span class="visually-hidden">(active)</span>
               </a>
             </li>
             <li class="button-group__item">
@@ -189,30 +203,64 @@
                 Hazard
               </a>
             </li>
-            <li class="button-group__item is-active">
-              <a href="bioactivity.html" class="button-group__link   is-active" aria-current="page">
+            <li class="button-group__item">
+              <a href="bioactivity.html" class="button-group__link">
                 Bioactivity
-                <span class="visually-hidden">(active)</span>
               </a>
             </li>
           </ul>
         </nav>
         <!-- End - breadcrumbs -->
-        <div>
-          <!-- layout="stacked" / layout="sidebar" // hideTryIt="false" -->
-          <elements-api
-                  apiDescriptionUrl="bioactivity.json"
-                  router="hash"
-          />
-        </div>
-        <p>Learn more about <a href="https://www.epa.gov/aboutepa/about-center-computational-toxicology-and-exposure-ccte">EPA’s Computational Toxicology and Exposure Research.</a></p>
-        <p>Learn more about <a href="https://www.epa.gov/chemical-research#:~:text=EPA%27s%20Safer%20Chemicals%20Research%20is%20transforming%20chemical%20risk-based,objectives%20to%20protect%20human%20health%20and%20the%20environment">EPA’s Chemical Safety Research.</a> </p>
-        <h5>Disclaimer</h5>
-        <p>This resource is a compilation of information sourced from many sites, databases and sources, including U.S. Federal and state sources and international bodies. The data are not reviewed by USEPA - the user must apply judgment in use of the information. You should consult the original scientific paper or data source if possible to ensure an understanding of the context of the data contained in the Dashboard.</p>
-        <p>Reference herein to any specific commercial products, process, or service by trade name, trademark, manufacturer, or otherwise, does not necessarily constitute or imply its endorsement, recommendation, or favoring by the United States Government. The views and opinions of the developers of the site expressed herein do not necessarily state or reflect those of the United States Government, and shall not be used for advertising or product endorsement purposes</p>
-        <p>With respect to documents available from this server, neither the United States Government nor any of their employees, makes any warranty, express or implied, including the warranties of merchantability and fitness for a particular purpose, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness of any information, apparatus, product, or process disclosed, or represents that its use would not infringe privately owned rights.</p>
-      </article>
-    </div>
+
+        <!-- layout="stacked" / layout="sidebar" // hideTryIt="false"
+                spec-url="chemical.json"
+        -->
+        <rapi-doc id="rapiDoc"
+                  spec-url="chemical.json"
+                  show-header = 'false'
+                  heading-text = 'CCTE Public APIs'
+                  header-color = '#FF791A'
+                  fill-request-fields-with-example= 'true'
+                  update-route = "false"
+                  show-info = 'true'
+                  allow-authentication ='true'
+                  allow-server-selection = 'false'
+                  allow-spec-url-load = 'false'
+                  allow-spec-file-load = 'false'
+                  allow-spec-file-download = 'false'
+                  allow-search = 'false'
+                  allow-advanced-search = 'false'
+                  allow-api-list-style-selection ='false'
+                  theme = 'light'
+                  bg-color = '#fff'
+                  text-color = '#444'
+                  primary-color = '#162e51'
+                  load-fonts = 'true'
+                  font-size = 'largest'
+                  show-method-in-nav-bar = 'as-colored-block'
+                  use-path-in-nav-bar = 'false'
+                  nav-bg-color = '#f0f0f0'
+                  nav-text-color = '#444'
+                  nav-accent-text-color = '#FF5733'
+                  nav-accent-color="#FF791A"
+                  nav-active-item-marker = 'colored-block'
+                  nav-item-spacing = 'relaxed'
+                  layout = 'row'
+                  render-style = 'focused'
+                  schema-style = 'table'
+                  show-components = 'false'
+                  allow-try = 'true'
+                  show-curl-before-try = "true"
+        > </rapi-doc>
+      </div>
+      <p>Learn more about <a href="https://www.epa.gov/aboutepa/about-center-computational-toxicology-and-exposure-ccte">EPA’s Computational Toxicology and Exposure Research.</a></p>
+      <p>Learn more about <a href="https://www.epa.gov/chemical-research#:~:text=EPA%27s%20Safer%20Chemicals%20Research%20is%20transforming%20chemical%20risk-based,objectives%20to%20protect%20human%20health%20and%20the%20environment">EPA’s Chemical Safety Research.</a> </p>
+      <h5>Disclaimer</h5>
+      <p>This resource is a compilation of information sourced from many sites, databases and sources, including U.S. Federal and state sources and international bodies. The data are not reviewed by USEPA - the user must apply judgment in use of the information. You should consult the original scientific paper or data source if possible to ensure an understanding of the context of the data contained in the Dashboard.</p>
+      <p>Reference herein to any specific commercial products, process, or service by trade name, trademark, manufacturer, or otherwise, does not necessarily constitute or imply its endorsement, recommendation, or favoring by the United States Government. The views and opinions of the developers of the site expressed herein do not necessarily state or reflect those of the United States Government, and shall not be used for advertising or product endorsement purposes</p>
+      <p>With respect to documents available from this server, neither the United States Government nor any of their employees, makes any warranty, express or implied, including the warranties of merchantability and fitness for a particular purpose, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness of any information, apparatus, product, or process disclosed, or represents that its use would not infringe privately owned rights.</p>
+    </article>
+    <!--        </div>-->
   </div>
 </main>
 
@@ -304,23 +352,23 @@
         <ul class="menu menu--social">
           <li class="menu__item">
             <a class="menu__link" aria-label="EPA’s Facebook" href="https://www.facebook.com/EPA">
-              <svg class="icon icon--social" aria-hidden="true"><use href="/images/sprite.artifact.svg#facebook-square"></use></svg>    </a>
+              <svg class="icon icon--social" aria-hidden="true"><use href="https://www.epa.gov/themes/epa_theme/images/sprite.artifact.svg#facebook-square"></use></svg>    </a>
           </li>
           <li class="menu__item">
             <a class="menu__link" aria-label="EPA’s Twitter" href="https://twitter.com/epa">
-              <svg class="icon icon--social" aria-hidden="true"><use href="/images/sprite.artifact.svg#twitter-square"></use></svg>    </a>
+              <svg class="icon icon--social" aria-hidden="true"><use href="https://www.epa.gov/themes/epa_theme/images/sprite.artifact.svg#twitter-square"></use></svg>    </a>
           </li>
           <li class="menu__item">
             <a class="menu__link" aria-label="EPA’s Youtube" href="https://www.youtube.com/user/USEPAgov">
-              <svg class="icon icon--social" aria-hidden="true"><use href="/images/sprite.artifact.svg#youtube-square"></use></svg>    </a>
+              <svg class="icon icon--social" aria-hidden="true"><use href="https://www.epa.gov/themes/epa_theme/images/sprite.artifact.svg#youtube-square"></use></svg>    </a>
           </li>
           <li class="menu__item">
             <a class="menu__link" aria-label="EPA’s Flickr" href="https://www.flickr.com/photos/usepagov">
-              <svg class="icon icon--social" aria-hidden="true"><use href="/images/sprite.artifact.svg#flickr-square"></use></svg>    </a>
+              <svg class="icon icon--social" aria-hidden="true"><use href="https://www.epa.gov/themes/epa_theme/images/sprite.artifact.svg#flickr-square"></use></svg>    </a>
           </li>
           <li class="menu__item">
             <a class="menu__link" aria-label="EPA’s Instagram" href="https://www.instagram.com/epagov">
-              <svg class="icon icon--social" aria-hidden="true"><use href="/images/sprite.artifact.svg#instagram-square"></use></svg>    </a>
+              <svg class="icon icon--social" aria-hidden="true"><use href="https://www.epa.gov/themes/epa_theme/images/sprite.artifact.svg#instagram-square"></use></svg>    </a>
           </li>
         </ul>
         <p class="footer__last-updated">Last updated on March 17, 2023</p>
@@ -330,43 +378,32 @@
 </footer>
 <a href="#" class="back-to-top" title="">
   <svg class="back-to-top__icon" role="img" aria-label="">
-    <use href="/images/sprite.artifact.svg#arrow"></use>
+    <use href="https://www.epa.gov/themes/epa_theme/images/sprite.artifact.svg#arrow"></use>
   </svg>
 </a><script src="https://www.epa.gov/core/assets/vendor/jquery/jquery.min.js?v=3.6.0"></script>
 <script src="https://www.epa.gov/core/assets/vendor/css-escape/css.escape.js?v=1.5.1"></script>
 <script src="https://www.epa.gov/core/assets/vendor/jquery-once/jquery.once.min.js?v=2.2.3"></script>
-<script src="https://www.epa.gov/core/misc/drupalSettingsLoader.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/core/misc/drupal.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/core/misc/drupal.init.js?v=9.2.6"></script>
 <script src="https://www.epa.gov/core/assets/vendor/picturefill/picturefill.min.js?v=3.0.3"></script>
 <script src="https://www.epa.gov/core/assets/vendor/tabbable/index.umd.min.js?v=5.2.0"></script>
 <script src="https://www.epa.gov/modules/custom/epa_wysiwyg/js/plugins/epaNew/epaNew.js?r33yib"></script>
-<script src="https://www.epa.gov/themes/epa_theme/js/dist/common.min.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/themes/epa_theme/js/dist/scripts.min.js?v=9.2.6"></script>
+<!--<script src="https://www.epa.gov/themes/epa_theme/js/dist/common.min.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/themes/epa_theme/js/dist/scripts.min.js?v=9.2.6"></script>-->
 
-<script src="https://www.epa.gov/themes/epa_theme/js/dist/sitewide-alert.min.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/themes/epa_theme/js/dist/definition.min.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/themes/epa_theme/js/dist/external-links.min.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/themes/epa_theme/js/dist/protected-links.min.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/themes/epa_theme/js/dist/media-link.min.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/themes/epa_theme/js/dist/hero-slideshow.min.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/themes/epa_theme/js/dist/before-after-swipe.min.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/core/assets/vendor/jquery-form/jquery.form.min.js?v=4.3.0"></script>
-<script src="https://www.epa.gov/core/misc/progress.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/core/modules/responsive_image/js/responsive_image.ajax.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/core/misc/ajax.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/core/themes/stable/js/ajax.js?v=9.2.6"></script>
-<script src="https://www.epa.gov/modules/contrib/views_ajax_get/views_ajax_get.js"></script>
+<!--<script src="https://www.epa.gov/themes/epa_theme/js/dist/sitewide-alert.min.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/themes/epa_theme/js/dist/definition.min.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/themes/epa_theme/js/dist/external-links.min.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/themes/epa_theme/js/dist/protected-links.min.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/themes/epa_theme/js/dist/media-link.min.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/themes/epa_theme/js/dist/hero-slideshow.min.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/themes/epa_theme/js/dist/before-after-swipe.min.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/core/assets/vendor/jquery-form/jquery.form.min.js?v=4.3.0"></script>-->
+<!--<script src="https://www.epa.gov/core/misc/progress.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/core/modules/responsive_image/js/responsive_image.ajax.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/core/misc/ajax.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/core/themes/stable/js/ajax.js?v=9.2.6"></script>-->
+<!--<script src="https://www.epa.gov/modules/contrib/views_ajax_get/views_ajax_get.js"></script>-->
 <script src="https://www.epa.gov/modules/custom/epa_alerts/js/epaAlerts.js" defer async></script>
 
-<!--DO NOT REMOVE-->
-<script type="text/json" id="pl-pattern-data-footer" class="pl-js-pattern-data">
-  {"cssEnabled":false,"patternLineageExists":true,"patternLineages":[{"lineagePattern":"uswds-banner","lineagePath":"../../patterns/uswds-banner-banner/uswds-banner-banner.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert--emergency","lineagePath":"../../patterns/components-site-alert-site-alert--emergency/components-site-alert-site-alert--emergency.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert","lineagePath":"../../patterns/components-site-alert-site-alert/components-site-alert-site-alert.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert--information","lineagePath":"../../patterns/components-site-alert-site-alert--information/components-site-alert-site-alert--information.rendered.html","lineageState":"complete"},{"lineagePattern":"layouts-header","lineagePath":"../../patterns/layouts-header-header/layouts-header-header.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-logo","lineagePath":"../../patterns/components-site-logo-site-logo/components-site-logo-site-logo.rendered.html","lineageState":"complete"},{"lineagePattern":"components-search--epa","lineagePath":"../../patterns/components-search-search--epa/components-search-search--epa.rendered.html","lineageState":"complete"},{"lineagePattern":"components-toggle-admin","lineagePath":"../../patterns/components-toggle-admin-toggle-admin/components-toggle-admin-toggle-admin.rendered.html","lineageState":"complete"},{"lineagePattern":"components-nav--epa","lineagePath":"../../patterns/components-nav-nav--epa/components-nav-nav--epa.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--main","lineagePath":"../../patterns/components-menu-menu--main/components-menu-menu--main.rendered.html","lineageState":"complete"},{"lineagePattern":"components-web-area-title","lineagePath":"../../patterns/components-web-area-title-web-area-title/components-web-area-title-web-area-title.rendered.html","lineageState":"complete"},{"lineagePattern":"templates-page","lineagePath":"../../patterns/templates-detail-pages-page/templates-detail-pages-page.rendered.html","lineageState":"complete"},{"lineagePattern":"components-footer","lineagePath":"../../patterns/components-footer-footer/components-footer-footer.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--footer","lineagePath":"../../patterns/components-menu-menu--footer/components-menu-menu--footer.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--social","lineagePath":"../../patterns/components-menu-menu--social/components-menu-menu--social.rendered.html","lineageState":"complete"},{"lineagePattern":"components-back-to-top","lineagePath":"../../patterns/components-back-to-top-back-to-top/components-back-to-top-back-to-top.rendered.html","lineageState":"complete"}],"lineage":[{"lineagePattern":"uswds-banner","lineagePath":"../../patterns/uswds-banner-banner/uswds-banner-banner.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert--emergency","lineagePath":"../../patterns/components-site-alert-site-alert--emergency/components-site-alert-site-alert--emergency.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert","lineagePath":"../../patterns/components-site-alert-site-alert/components-site-alert-site-alert.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert--information","lineagePath":"../../patterns/components-site-alert-site-alert--information/components-site-alert-site-alert--information.rendered.html","lineageState":"complete"},{"lineagePattern":"layouts-header","lineagePath":"../../patterns/layouts-header-header/layouts-header-header.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-logo","lineagePath":"../../patterns/components-site-logo-site-logo/components-site-logo-site-logo.rendered.html","lineageState":"complete"},{"lineagePattern":"components-search--epa","lineagePath":"../../patterns/components-search-search--epa/components-search-search--epa.rendered.html","lineageState":"complete"},{"lineagePattern":"components-toggle-admin","lineagePath":"../../patterns/components-toggle-admin-toggle-admin/components-toggle-admin-toggle-admin.rendered.html","lineageState":"complete"},{"lineagePattern":"components-nav--epa","lineagePath":"../../patterns/components-nav-nav--epa/components-nav-nav--epa.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--main","lineagePath":"../../patterns/components-menu-menu--main/components-menu-menu--main.rendered.html","lineageState":"complete"},{"lineagePattern":"components-web-area-title","lineagePath":"../../patterns/components-web-area-title-web-area-title/components-web-area-title-web-area-title.rendered.html","lineageState":"complete"},{"lineagePattern":"templates-page","lineagePath":"../../patterns/templates-detail-pages-page/templates-detail-pages-page.rendered.html","lineageState":"complete"},{"lineagePattern":"components-footer","lineagePath":"../../patterns/components-footer-footer/components-footer-footer.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--footer","lineagePath":"../../patterns/components-menu-menu--footer/components-menu-menu--footer.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--social","lineagePath":"../../patterns/components-menu-menu--social/components-menu-menu--social.rendered.html","lineageState":"complete"},{"lineagePattern":"components-back-to-top","lineagePath":"../../patterns/components-back-to-top-back-to-top/components-back-to-top-back-to-top.rendered.html","lineageState":"complete"}],"patternLineageRExists":false,"patternLineagesR":[],"lineageR":[],"patternLineageEExists":true,"patternDesc":"","patternBreadcrumb":{"patternGroup":"pages","patternSubgroup":""},"patternExtension":"twig","patternName":"EPA Standard Template","patternPartial":"pages-standalone-template","patternState":"inprogress","patternEngineName":"twig-php","extraOutput":{}}
-</script>
-
-<script>
-  window.patternData = {"cssEnabled":false,"patternLineageExists":true,"patternLineages":[{"lineagePattern":"uswds-banner","lineagePath":"../../patterns/uswds-banner-banner/uswds-banner-banner.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert--emergency","lineagePath":"../../patterns/components-site-alert-site-alert--emergency/components-site-alert-site-alert--emergency.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert","lineagePath":"../../patterns/components-site-alert-site-alert/components-site-alert-site-alert.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert--information","lineagePath":"../../patterns/components-site-alert-site-alert--information/components-site-alert-site-alert--information.rendered.html","lineageState":"complete"},{"lineagePattern":"layouts-header","lineagePath":"../../patterns/layouts-header-header/layouts-header-header.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-logo","lineagePath":"../../patterns/components-site-logo-site-logo/components-site-logo-site-logo.rendered.html","lineageState":"complete"},{"lineagePattern":"components-search--epa","lineagePath":"../../patterns/components-search-search--epa/components-search-search--epa.rendered.html","lineageState":"complete"},{"lineagePattern":"components-toggle-admin","lineagePath":"../../patterns/components-toggle-admin-toggle-admin/components-toggle-admin-toggle-admin.rendered.html","lineageState":"complete"},{"lineagePattern":"components-nav--epa","lineagePath":"../../patterns/components-nav-nav--epa/components-nav-nav--epa.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--main","lineagePath":"../../patterns/components-menu-menu--main/components-menu-menu--main.rendered.html","lineageState":"complete"},{"lineagePattern":"components-web-area-title","lineagePath":"../../patterns/components-web-area-title-web-area-title/components-web-area-title-web-area-title.rendered.html","lineageState":"complete"},{"lineagePattern":"templates-page","lineagePath":"../../patterns/templates-detail-pages-page/templates-detail-pages-page.rendered.html","lineageState":"complete"},{"lineagePattern":"components-footer","lineagePath":"../../patterns/components-footer-footer/components-footer-footer.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--footer","lineagePath":"../../patterns/components-menu-menu--footer/components-menu-menu--footer.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--social","lineagePath":"../../patterns/components-menu-menu--social/components-menu-menu--social.rendered.html","lineageState":"complete"},{"lineagePattern":"components-back-to-top","lineagePath":"../../patterns/components-back-to-top-back-to-top/components-back-to-top-back-to-top.rendered.html","lineageState":"complete"}],"lineage":[{"lineagePattern":"uswds-banner","lineagePath":"../../patterns/uswds-banner-banner/uswds-banner-banner.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert--emergency","lineagePath":"../../patterns/components-site-alert-site-alert--emergency/components-site-alert-site-alert--emergency.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert","lineagePath":"../../patterns/components-site-alert-site-alert/components-site-alert-site-alert.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-alert--information","lineagePath":"../../patterns/components-site-alert-site-alert--information/components-site-alert-site-alert--information.rendered.html","lineageState":"complete"},{"lineagePattern":"layouts-header","lineagePath":"../../patterns/layouts-header-header/layouts-header-header.rendered.html","lineageState":"complete"},{"lineagePattern":"components-site-logo","lineagePath":"../../patterns/components-site-logo-site-logo/components-site-logo-site-logo.rendered.html","lineageState":"complete"},{"lineagePattern":"components-search--epa","lineagePath":"../../patterns/components-search-search--epa/components-search-search--epa.rendered.html","lineageState":"complete"},{"lineagePattern":"components-toggle-admin","lineagePath":"../../patterns/components-toggle-admin-toggle-admin/components-toggle-admin-toggle-admin.rendered.html","lineageState":"complete"},{"lineagePattern":"components-nav--epa","lineagePath":"../../patterns/components-nav-nav--epa/components-nav-nav--epa.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--main","lineagePath":"../../patterns/components-menu-menu--main/components-menu-menu--main.rendered.html","lineageState":"complete"},{"lineagePattern":"components-web-area-title","lineagePath":"../../patterns/components-web-area-title-web-area-title/components-web-area-title-web-area-title.rendered.html","lineageState":"complete"},{"lineagePattern":"templates-page","lineagePath":"../../patterns/templates-detail-pages-page/templates-detail-pages-page.rendered.html","lineageState":"complete"},{"lineagePattern":"components-footer","lineagePath":"../../patterns/components-footer-footer/components-footer-footer.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--footer","lineagePath":"../../patterns/components-menu-menu--footer/components-menu-menu--footer.rendered.html","lineageState":"complete"},{"lineagePattern":"components-menu--social","lineagePath":"../../patterns/components-menu-menu--social/components-menu-menu--social.rendered.html","lineageState":"complete"},{"lineagePattern":"components-back-to-top","lineagePath":"../../patterns/components-back-to-top-back-to-top/components-back-to-top-back-to-top.rendered.html","lineageState":"complete"}],"patternLineageRExists":false,"patternLineagesR":[],"lineageR":[],"patternLineageEExists":true,"patternDesc":"","patternBreadcrumb":{"patternGroup":"pages","patternSubgroup":""},"patternExtension":"twig","patternName":"EPA Standard Template","patternPartial":"pages-standalone-template","patternState":"inprogress","patternEngineName":"twig-php","extraOutput":{}};
-</script>
 
 <script>
   /*!
@@ -412,18 +449,13 @@
 </script>
 
 
-<script type="module">
-  // always load Pattern-specific JS so UI like accordions, etc can continue to work even when viewed as a standalone HTML page
-  import('/js/patternlab-pattern.modern.js');
-</script>
-
-<script id="pl-js-insert-1677614911634" nomodule>
-  /*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc. (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
-  !function(e){var t=function(t,n){"use strict";var o=e.document.getElementsByTagName("script")[0],r=e.document.createElement("script");return r.src=t,r.async=!0,o.parentNode.insertBefore(r,o),n&&"function"==typeof n&&(r.onload=n),r};"undefined"!=typeof module?module.exports=t:e.loadJS=t}("undefined"!=typeof global?global:this);
-
-  // always load Pattern-specific JS so UI like accordions, etc can continue to work even when viewed as a standalone HTML page
-  loadJS('/js/patternlab-pattern.js');
-</script>
+<!--&lt;!&ndash;- I added following script to load the chemical.json file from the server &ndash;&gt;-->
+<!--<script>-->
+<!--  document.addEventListener("DOMContentLoaded", function() {-->
+<!--    rapiData.loadSpec("chemical.json");-->
+<!--    console.log("JSON is loaded:");-->
+<!--  });-->
+<!--</script>-->
 
 </body>
 </html>
