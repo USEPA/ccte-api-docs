@@ -15,5 +15,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Example step
-        run: echo "This workflow runs on merge to specific branches."
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and run Docker containers
+        run: |
+          docker-compose up --build -d
