@@ -1,0 +1,13 @@
+---
+
+applications:
+- name: ccte-docs-prod
+  memory: 32M
+  disk_quota: 64M
+  instances: 1
+  buildpacks:
+  - nginx_buildpack
+  routes:
+  #- route: api-docs.app.cloud.gov
+  #- route: ccte-api.app.cloud.gov/docs
+  - route: api-ccte.epa.gov/docs
