@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Computational Toxicology and Exposure Data APIs</title>
+  </head>
+  <body>
+    <head>
+
+      <link rel="stylesheet" href="css/style.css" media="all" />
+      <link rel="stylesheet" href="css/accordions.css"
+        media="all" />
+      <link rel="stylesheet" href="css/boxes.css" media="all" />
+      <link rel="stylesheet" href="css/forms.css" media="all" />
+      <link rel="stylesheet" href="css/tables.css" media="all" />
+      <link rel="stylesheet" href="css/tabs.css" media="all" />
+      <link rel="shortcut icon" href="https://www.epa.gov/sites/all/themes/epa/favicon.ico" type="image/vnd.microsoft.icon">
+      
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">      
+
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src="//www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);})(window,document,"script","dataLayer","GTM-L8ZB");</script>
+      
+      <title>CCTE API Documentation</title>
+      </head>
+      <header>
+        <!-- End Google Tag Manager -->
+        <div id="epa-template-top" aria-hidden="false">
+          <div class="show-for-sr">
+            <a href="#ecotox-content"
+              class="skip-link element-invisible element-focusable">Jump to
+              main content</a>
+          </div>
+          <header class="masthead clearfix" role="banner">
+            <img alt="" class="site-logo"
+              src="https://www.epa.gov/sites/all/themes/epa/logo.png">
+            <div class="site-name-and-slogan">
+              <h1 class="site-name">
+                <a href="https://www.epa.gov/" target="_blank" rel="home"
+                  title="Go to the EPA home page"><span>US EPA</span></a>
+              </h1>
+              <div class="site-slogan">United States Environmental
+                Protection Agency</div>
+            </div>
+            <div class="region-header">
+              <div class="block-epa-core-gsa-epa-search"
+                id="block-epa-core-gsa-epa-search">
+                <form action="https://search.epa.gov/epasearch/epasearch"
+                  class="epa-search" method="get">
+                  <label class="element-hidden" for="search-box">Search</label> <input
+                    autocomplete="off" class="form-text ui-autocomplete-input"
+                    id="search-box" name="querytext" placeholder="Search EPA.gov"
+                    value=""> <span aria-live="polite"
+                    class="ui-helper-hidden-accessible" role="status"></span>
+                  <button class="epa-search-button" id="search-button"
+                    title="Search" type="submit"
+                    data-gtm-vis-recent-on-screen-42870_124="563"
+                    data-gtm-vis-first-on-screen-42870_124="563"
+                    data-gtm-vis-total-visible-time-42870_124="100"
+                    data-gtm-vis-has-fired-42870_124="1" style="margin-top: 4px;">Search</button>
+                  <input name="areaname" type="hidden" value=""> <input
+                    name="areacontacts" type="hidden" value=""> <input
+                    name="areasearchurl" type="hidden" value=""> <input
+                    name="typeofsearch" type="hidden" value="epa"> <input
+                    name="result_template" type="hidden" value="2col.ftl">
+                </form>
+              </div>
+            </div>
+        </div>
+      <nav class="nav main-nav clearfix" role="navigation">
+        <div class="nav__inner">
+          <h2 class="element-invisible">Main menu</h2>
+          <ul class="menu " role="menu" style="float: none; width: 100%; text-align: center">
+            <li class="expanded active-trail menu-item" role="presentation" style="display: inline-block !important;float: none;">
+              <a class="menu-link" target="_blank"
+              href="https://www.epa.gov/environmental-topics" role="menuitem"
+              title="View links to the most popular pages for each of EPA?s top environmental topics.">Environmental
+                Topics</a>
+            </li>
+            <li class="menu-item" role="presentation"  style="display: inline-block !important;float: none;"><a class="menu-link"
+              target="_blank" href="https://www.epa.gov/laws-regulations"
+              role="menuitem"
+              title="View links to regulatory information by topic and sector, and to top pages about environmental laws, regulations, policies, compliance, and enforcement." >Laws
+                &amp; Regulations</a></li>
+            <li class="expanded menu-item" role="presentation"  style="display: inline-block !important;float: none;"><a
+              class="menu-link" target="_blank"
+              href="https://www.epa.gov/aboutepa" role="menuitem"
+              title="Learn more about our mission, organization, and locations.">About
+                EPA</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-bar clearfix">
+          <label class="menu-button" for="mobile-nav-toggle">Menu</label>
+        </div>
+        <input checked="" id="mobile-nav-toggle" type="checkbox">
+        <div class="mobile-links element-hidden" id="mobile-links"
+          style="height: 2404px;">
+          <ul class="mobile-menu">
+            <li class="expanded menu-item"><a class="menu-link"
+              target="_blank" href="https://www.epa.gov/environmental-topics"
+              tabindex="-1"
+              title="View links to the most popular pages for each of EPA?s top environmental topics.">Environmental
+                Topics</a></li>
+            <li class="menu-item"><a class="menu-link" target="_blank"
+              href="https://www.epa.gov/laws-regulations" tabindex="-1"
+              title="View links to regulatory information by topic and sector, and to top pages about environmental laws, regulations, policies, compliance, and enforcement.">Laws
+                &amp; Regulations</a></li>
+            <li class="expanded menu-item"><a class="menu-link"
+              target="_blank" href="https://www.epa.gov/aboutepa" tabindex="-1"
+              title="Learn more about our mission, organization, and locations.">About
+                EPA</a></li>
+          </ul>
+        </div>
+      </div>
+      </header>    
+      <div class="container">        
+        <!-- -->
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Home</li>
+          </ol>
+        </nav>       
+        <!-- -->
+        <div class="container px-4 text-center">          
+          <div class="text-start row gx-5">
+            <h1>Computational Toxicology and Exposure Data APIs</h1>
+            <p>EPA’s computational toxicology research efforts evaluate the potential health effects of thousands of chemicals. The process of evaluating potential health effects involves generating data that investigates the potential harm, or hazard of a chemical, the degree of exposure to chemicals as well as the unique chemical characteristics.</p>
+            <p>The APIs provided by EPA enable users to extract specific data from various databases and integrate them into their applications. These data are also available for download on our <a href="https://www.epa.gov/chemical-research/downloadable-computational-toxicology-data">Data Download</a> page</p>
+            <p>As part of EPA’s commitment to share data, all of the computational toxicology data is publicly available for anyone to access and use. EPA's computational toxicology data is considered "open data", and thus all of the data are free of all copyright restrictions, and fully and freely available for both non-commercial and commercial use.</p>
+            <!-- <p>The EPA provides APIs for downloading computational toxicology and exposure data. These APIs enable users to extract specific data from various databases and integrate them into their applications. The data can be used for chemical risk assessment, predictive toxicology, and environmental health research. This data is also available for <a href="https://www.epa.gov/chemical-research/downloadable-computational-toxicology-data">download</a>.</p> -->
+            <!-- <p>EPA has computational toxicology and exposure data available for <a href="https://www.epa.gov/chemical-research/downloadable-computational-toxicology-data">download</a> and use. The Application Programming Interfaces (APIs) provided on this page allow data users to extract specific data of interest from across various databases. These APIs could also use to integrate existing applications with the data. </p> -->
+          </div>
+          <div class="row gx-5">
+            <div class="alert alert-info" role="alert">
+              <h4 class="alert-heading">Limited Access APIs</h4>
+              <p>An API Key is needed to access these APIs. Each user will need a specific key for each application. Please <a href="mailto:ccte-api@epa.gov?subject=API Key Request">send an email</a> to request an API key.</p>
+            </div>            
+          </div>
+        
+          <div class="row gx-5">
+            <div class="col">
+              <div class="card h-100 pt-2" style="width: 20rem;">
+                <img src="chemical.svg" class="card-img-top" width="80" height="80" alt="...">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Chemical APIs</h5>
+                  <p class="card-text">Access APIs for searching chemicals, files for chemical structures, and chemical details.</p>
+                  <a href="chemical.html" class="btn btn-primary mt-auto btn-1g btn-block">Documentation</a>
+                </div>
+              </div>                
+            </div>
+            <div class="col">
+              <div class="card h-100 pt-2" style="width: 20rem;">
+                <img src="biohazard.svg" class="card-img-top" width="80" height="80" alt="...">
+                <div class="card-body  d-flex flex-column">
+                  <h5 class="card-title">Hazard APIs</h5>
+                  <p class="card-text">Access APIs for human and ecotoxicology data.</p>
+                  <a href="hazard.html" class="btn btn-primary mt-auto btn-1g btn-block">Documentation</a>
+                </div>
+              </div>                
+            </div>
+            <div class="col">
+              <div class="card h-100 pt-2" style="width: 20rem;">
+                <img src="dna.svg" class="card-img-top" width="80" height="80" alt="...">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Bioactivity APIs</h5>
+                  <p class="card-text">Access APIs for chemical bioactivity data.</p>
+                  <a href="bioactivity.html" class="btn btn-primary mt-auto btn-1g btn-block">Documentation</a>
+                </div>
+              </div>  
+             </div> 
+          </div>
+          <div class="row gx-5">
+            <div class="text-start p-3" role="">
+              <h6>Disclaimer</h6>
+              <p>This resource is a compilation of information sourced from many sites, databases and sources, including U.S. Federal and state sources and international bodies. The data are not reviewed by USEPA - the user must apply judgment in use of the information. You should consult the original scientific paper or data source if possible to ensure an understanding of the context of the data contained in the Dashboard.</p>
+              <p>Reference herein to any specific commercial products, process, or service by trade name, trademark, manufacturer, or otherwise, does not necessarily constitute or imply its endorsement, recommendation, or favoring by the United States Government. The views and opinions of the developers of the site expressed herein do not necessarily state or reflect those of the United States Government, and shall not be used for advertising or product endorsement purposes</p>
+              <p>With respect to documents available from this server, neither the United States Government nor any of their employees, makes any warranty, express or implied, including the warranties of merchantability and fitness for a particular purpose, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness of any information, apparatus, product, or process disclosed, or represents that its use would not infringe privately owned rights.</p>
+              <p>Learn more about <a href="https://www.epa.gov/aboutepa/about-center-computational-toxicology-and-exposure-ccte">EPA’s Computational Toxicology and Exposure Research.</a></p>
+              <p>Learn more about <a href="https://www.epa.gov/chemical-research#:~:text=EPA%27s%20Safer%20Chemicals%20Research%20is%20transforming%20chemical%20risk-based,objectives%20to%20protect%20human%20health%20and%20the%20environment">EPA’s Chemical Safety Research.</a> </p>
+            </div>
+          </div>
+        </div>
+      </div>      
+
+    <footer class="main-footer clearfix" role="contentinfo" style="margin-top: 10px">
+      <div class="main-footer__inner">
+        <div class="region-footer">
+          <div class="block-pane-epa-global-footer" id="block-pane-epa-global-footer">
+            <div class="row cols-3">
+              <div class="col size-1of3">
+                <div class="col__title">
+                  Discover.
+                </div>
+                <ul class="menu">
+                  <li><a href="https://www.epa.gov/accessibility">Accessibility</a></li>
+                  <li><a href="https://www.epa.gov/aboutepa/epas-administrator">EPA Administrator</a></li>
+                  <li><a href="https://www.epa.gov/planandbudget">Budget &amp; Performance</a></li>
+                  <li><a href="https://www.epa.gov/contracts">Contracting</a></li>
+                  <li><a href="https://www.epa.gov/home/grants-and-other-funding-opportunities">Grants</a></li>
+                  <li><a href="https://19january2017snapshot.epa.gov">January 19, 2017 Web Snapshot</a></li>
+                  <li><a href="https://www.epa.gov/ocr/whistleblower-protections-epa-and-how-they-relate-non-disclosure-agreements-signed-epa-employees">No FEAR Act Data</a></li>
+                  <li><a href="https://www.epa.gov/privacy">Privacy</a></li>
+                </ul>
+              </div>
+              <div class="col size-1of3">
+                <div class="col__title">
+                  Connect.
+                </div>
+                <ul class="menu">
+                  <li><a href="https://www.data.gov/">Data.gov</a></li>
+                  <li><a href="https://www.epa.gov/office-inspector-general/about-epas-office-inspector-general">Inspector General</a></li>
+                  <li><a href="https://www.epa.gov/careers">Jobs</a></li>
+                  <li><a href="https://www.epa.gov/newsroom">Newsroom</a></li>
+                  <li><a href="https://www.epa.gov/open">Open Government</a></li>
+                  <li><a href="https://www.regulations.gov/">Regulations.gov</a></li>
+                  <li><a href="https://www.epa.gov/newsroom/email-subscriptions">Subscribe</a></li>
+                  <li><a href="https://www.usa.gov/">USA.gov</a></li>
+                  <li><a href="https://www.whitehouse.gov/">White House</a></li>
+                </ul>
+              </div>
+              <div class="col size-1of3">
+                <div class="col__title">
+                  Ask.
+                </div>
+                <ul class="menu">
+                  <li><a href="https://www.epa.gov/home/forms/contact-us">Contact EPA</a></li>
+                  <li><a href="https://www.epa.gov/home/epa-hotlines">Hotlines</a></li>
+                  <li><a href="https://www.epa.gov/foia">FOIA Requests</a></li>
+                  <li><a href="https://www.epa.gov/home/frequent-questions-specific-epa-programstopics">Frequent Questions</a></li>
+                </ul>
+                <div class="col__title">
+                  Follow.
+                </div>
+                <ul class="social-menu">
+                  <li><a class="menu-link social-facebook" href="https://www.facebook.com/EPA">EPA's Facebook</a></li>
+                  <li><a class="menu-link social-twitter" href="https://twitter.com/epa">EPA's Twitter</a></li>
+                  <li><a class="menu-link social-youtube" href="https://www.youtube.com/user/USEPAgov">EPA's YouTube</a></li>
+                  <li><a class="menu-link social-flickr" href="https://www.flickr.com/photos/usepagov">EPA's Flickr</a></li>
+                  <li><a class="menu-link social-instagram" href="https://www.instagram.com/epagov">EPA's Instagram</a></li>
+                </ul>
+                <p class="last-updated">Last updated on {Month day, YYYY}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</html>
+
