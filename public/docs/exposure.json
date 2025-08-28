@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://ctx-api.ccte.epa.gov",
+      "url": "https://comptox.epa.gov/ctx-api",
       "description": "Production Environment"
     }
   ],
@@ -2107,10 +2107,10 @@
       "QsurDataAll": {
         "type": "object",
         "properties": {
-          "harmonizedFunctionalUse": {
+          "dtxsid": {
             "type": "string"
           },
-          "dtxsid": {
+          "harmonizedFunctionalUse": {
             "type": "string"
           },
           "probability": {
@@ -2236,20 +2236,20 @@
           "label": {
             "type": "string"
           },
-          "dtxsid": {
-            "type": "string"
-          },
           "median": {
             "type": "number"
           },
-          "upper95th": {
-            "type": "number"
+          "dtxsid": {
+            "type": "string"
           },
           "lower95th": {
             "type": "number"
           },
           "hoverMsg": {
             "type": "string"
+          },
+          "upper95th": {
+            "type": "number"
           }
         }
       },

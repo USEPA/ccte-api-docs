@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://ctx-api.ccte.epa.gov",
+      "url": "https://comptox.epa.gov/ctx-api",
       "description": "Production Environment"
     }
   ],
@@ -3525,32 +3525,32 @@
       "CcdGenetoxDetail": {
         "type": "object",
         "properties": {
+          "source": {
+            "type": "string"
+          },
           "year": {
             "type": "integer",
             "format": "int32"
           },
-          "source": {
-            "type": "string"
-          },
-          "metabolicActivation": {
-            "type": "string"
-          },
           "species": {
-            "type": "string"
-          },
-          "dtxsid": {
             "type": "string"
           },
           "strain": {
             "type": "string"
           },
-          "assayResult": {
+          "dtxsid": {
+            "type": "string"
+          },
+          "assayCategory": {
             "type": "string"
           },
           "assayType": {
             "type": "string"
           },
-          "assayCategory": {
+          "assayResult": {
+            "type": "string"
+          },
+          "metabolicActivation": {
             "type": "string"
           }
         }
@@ -3604,19 +3604,13 @@
       "CcdADME": {
         "type": "object",
         "properties": {
-          "reference": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
           "label": {
             "type": "string"
           },
-          "model": {
-            "type": "string"
-          },
-          "dataSourceSpecies": {
+          "reference": {
             "type": "string"
           },
           "species": {
@@ -3628,10 +3622,16 @@
           "unit": {
             "type": "string"
           },
-          "predicted": {
+          "model": {
+            "type": "string"
+          },
+          "dataSourceSpecies": {
             "type": "string"
           },
           "measured": {
+            "type": "string"
+          },
+          "predicted": {
             "type": "string"
           },
           "percentile": {
