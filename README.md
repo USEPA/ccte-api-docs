@@ -12,19 +12,17 @@ Originating from the US EPA's Center of Computational Toxicology and Exposure (C
 
 The source data for the CTX APIs includes various databases or datasets across the data domains. Visit the individual repositories for more information:
 
-• \[Chemical](https://github.com/USEPA/ccte-api-chemical)
-
-• \[Exposure](https://github.com/USEPA/ccte-api-exposure)
-
-• \[Bioactivity](https://github.com/USEPA/ccte-api-bioactivity)
-
-• \[Hazard](https://github.com/USEPA/ccte-api-hazard)
 
 
+* \[Chemical](https://github.com/USEPA/ccte-api-chemical)
+* \[Exposure](https://github.com/USEPA/ccte-api-exposure)
+* \[Bioactivity](https://github.com/USEPA/ccte-api-bioactivity)
+* \[Hazard](https://github.com/USEPA/ccte-api-hazard)
 
-\- If you would like to report a bug or have other questions related to the CTX APIs, please contact the \[CTX API Admins](mailto:ccte\_api@epa.gov).
 
-\- If you are interested in contributing, please submit a issue or start a discussion. See \[CONTRIBUTING](https://github.com/USEPA/ccte-api-exposure/blob/dev/CONTRIBUTING.md) for more information.
+
+* If you would like to report a bug or have other questions related to the CTX APIs, please contact the \[CTX API Admins](mailto:ccte\_api@epa.gov).
+* If you are interested in contributing, please submit a issue or start a discussion. See \[CONTRIBUTING](https://github.com/USEPA/ccte-api-exposure/blob/dev/CONTRIBUTING.md) for more information.
 
 
 
@@ -32,5 +30,5 @@ The source data for the CTX APIs includes various databases or datasets across t
 
 
 
-The United States Environmental Protection Agency (EPA) GitHub project code is provided on an "as is" basis and the user assumes responsibility for its use. EPA has relinquished control of the information and no longer has responsibility to protect the integrity, confidentiality, or availability of the information. Any reference to specific commercial products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by EPA. The EPA seal and logo shall not be used in any manner to imply endorsement of any commercial product or activity by EPA or the United States Government. 
+The United States Environmental Protection Agency (EPA) GitHub project code is provided on an "as is" basis and the user assumes responsibility for its use. EPA has relinquished control of the information and no longer has responsibility to protect the integrity, confidentiality, or availability of the information. Any reference to specific commercial products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by EPA. The EPA seal and logo shall not be used in any manner to imply endorsement of any commercial product or activity by EPA or the United States Government.
 
