@@ -1,48 +1,48 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Computational Toxicology and Exposure Data APIs - Exposure",
-    "description": "The Exposure APIs are part of a set of public computational toxicology and exposure APIs and provide exposure data through a set of API endpoints.",
-    "version": "1.0.0"
+    "title": "Computational Toxicology and Exposure (CTX) APIs - CTX Exposure API",
+    "description": "The CTX Exposure API is part of US EPA's Computational Toxicology and Exposure APIs. The CTX Exposure API provides programmtic access to exposure data through a set of endpoints.",
+    "version": "1.1.1"
   },
   "servers": [
     {
       "url": "https://ctx-api-dev.ccte.epa.gov",
-      "description": "Production Environment"
+      "description": "Development Environment"
     }
   ],
   "tags": [
     {
-      "name": "CCD Data Resource",
-      "description": "API endpoints for CompTox Chemicals Dashboard exposure tabs."
-    },
-    {
-      "name": "MMDB Resource",
-      "description": "API endpoints for collecting data for MMDB database."
-    },
-    {
       "name": "Functional Use Resource",
-      "description": "API endpoints for functional use in exposure data."
-    },
-    {
-      "name": "Product Data Resource",
-      "description": "API endpoints for product data in exposure data."
-    },
-    {
-      "name": "Httk Data Resource",
-      "description": "API endpoints for httk data in exposure data."
+      "description": "Collection of endpoints with functional use data. Functional use describes a chemical's role in a product or process, which can help determine exposure pathways used to assess chemical exposure. These curated data are sourced from US EPA's Chemicals and Products Database (CPDat)."
     },
     {
       "name": "List Presence Resource",
-      "description": "API endpoints for list presence in exposure data."
+      "description": "Collection of endpoints with list presence data, reflecting the occurrence of chemicals on lists present in publicly available documents (sourced from a variety of federal and state agencies and trade associations). These lists are tagged with List Presence Keywords (LPKs) which is a controlled vocabulary developed by EPA that describe broad use information for a chemical useful for general categorization of chemicals across uses, populations, and/or regulatory groups. These curated data are sourced from US EPA's Chemicals and Products Database (CPDat)."
     },
     {
-      "name": "General Exposure Prediction Resource",
-      "description": "API endpoints for general prediction in exposure data."
+      "name": "Product Data Resource",
+      "description": "Collection of endpoints pertaining to product data. These data provide information on how chemicals are used in commerce or by consumers as well as weight fractions of ingredients in products, where available. These curated data are sourced from US EPA's Chemicals and Products Database (CPDat)."
+    },
+    {
+      "name": "httk Data Resource",
+      "description": "Collection of endpoints with data to support toxicokinetic modeling applications sourced from the US EPA high throughput toxicokinetics `httk` R package. Models to predict toxicokinetics (chemical absorption, distribution, metabolism, and excretion by the body) are tailored using chemical-specific in vitro data and physiological information."
     },
     {
       "name": "Demographic Exposure Prediction Resource",
-      "description": "API endpoints for demographic prediction in exposure data."
+      "description": "Collection of endpoints with SEEM demographic exposure prediction data. SEEM (Systematic Empirical Evaluation of Models) is a framework developed by the US EPA to predict exposure to chemicals across the general population and demographic subsets of the US."
+    },
+    {
+      "name": "General Exposure Prediction Resource",
+      "description": "Collection of endpoints for general prediction data. SEEM (Systematic Empirical Evaluation of Models) is a framework developed by the US EPA to predict exposure to chemicals across the general population and demographic subsets of the US."
+    },
+    {
+      "name": "MMDB Resource",
+      "description": "Collection of endpoints with harmonized data from the Multimedia Monitoring Database (MMDB) to inform on chemical presence in various media like air, water, soil, and human tissues."
+    },
+    {
+      "name": "CCD Data Resource",
+      "description": "Collection of endpoints used to populate CompTox Chemicals Dashboard (CCD) Exposure tabs."
     }
   ],
   "paths": {
@@ -51,8 +51,8 @@
         "tags": [
           "General Exposure Prediction Resource"
         ],
-        "summary": "Find general exposure prediction SEEMs data by batch of dtxsids",
-        "description": "return general prediction SEEMs data for requested dtxsids",
+        "summary": "Get SEEM General Exposure Prediction data for a batch of DTXSIDs",
+        "description": "return SEEM general exposure prediction data for requested DTXSIDs",
         "operationId": "batchSearchGenExpoPrediction",
         "requestBody": {
           "description": "JSON array of DSSTox Substance Identifier",
@@ -98,8 +98,8 @@
         "tags": [
           "Demographic Exposure Prediction Resource"
         ],
-        "summary": "Find demographic prediction SEEMs data by batch of dtxsids",
-        "description": "return demographic prediction SEEMs data for requested dtxsids",
+        "summary": "Get SEEM Demographic Exposure Prediction data for batch of DTXSIDs",
+        "description": "return SEEM demographic prediction data for requested DTXSIDs",
         "operationId": "batchSearchDemoExpoPrediction",
         "requestBody": {
           "description": "JSON array of DSSTox Substance Identifier",
@@ -145,8 +145,8 @@
         "tags": [
           "Product Data Resource"
         ],
-        "summary": "Find product data by batch dtxsids",
-        "description": "return product data for requested dtxsids",
+        "summary": "Get product data for a batch of DTXSIDs",
+        "description": "return product data for requested DTXSIDs",
         "operationId": "batchSearchProductData",
         "requestBody": {
           "description": "JSON array of DSSTox Substance Identifier",
@@ -192,8 +192,8 @@
         "tags": [
           "List Presence Resource"
         ],
-        "summary": "Find list presence data by batch of dtxsids",
-        "description": "return list presence data for requested dtxsids",
+        "summary": "Get List Presence data for a batch of DTXSIDs",
+        "description": "return list presence data for requested DTXSIDs",
         "operationId": "batchSearchListPresence",
         "requestBody": {
           "description": "JSON array of DSSTox Substance Identifier",
@@ -237,10 +237,10 @@
     "/exposure/httk/search/by-dtxsid/": {
       "post": {
         "tags": [
-          "Httk Data Resource"
+          "httk Data Resource"
         ],
-        "summary": "Find httk data by batch of dtxsids",
-        "description": "return httk data for requested dtxsids",
+        "summary": "Get httk data for a batch of DTXSIDs",
+        "description": "return httk data for requested DTXSIDs",
         "operationId": "batchSearchHttk",
         "requestBody": {
           "description": "JSON array of DSSTox Substance Identifier",
@@ -286,8 +286,8 @@
         "tags": [
           "Functional Use Resource"
         ],
-        "summary": "Find functional-use data by batch of dtxsids",
-        "description": "return functional-use data  for requested dtxsids.",
+        "summary": "Get functional-use data for a batch of DTXSIDs",
+        "description": "return functional-use data for requested DTXSIDs",
         "operationId": "batchSearchFunctionalUse",
         "requestBody": {
           "description": "JSON array of DSSTox Substance Identifier",
@@ -313,7 +313,7 @@
                   "type": "string",
                   "oneOf": [
                     {
-                      "$ref": "#/components/schemas/FunctionalUseAll"
+                      "$ref": "#/components/schemas/FunctionalUse"
                     }
                   ]
                 }
@@ -333,8 +333,8 @@
         "tags": [
           "General Exposure Prediction Resource"
         ],
-        "summary": "Find general prediction SEEMs data by dtxsid",
-        "description": "return demographic prediction SEEMs data for requested dtxsid",
+        "summary": "Get SEEM General Exposure Prediction data by DTXSID",
+        "description": "return SEEM general exposure prediction data for requested DTXSID",
         "operationId": "getGenExpoPredictionByDtxsid",
         "parameters": [
           {
@@ -386,8 +386,8 @@
         "tags": [
           "Demographic Exposure Prediction Resource"
         ],
-        "summary": "Find demographic prediction SEEMs data by dtxsid",
-        "description": "return demographic prediction SEEMs data for requested dtxsid",
+        "summary": "Get SEEM Demographic Exposure Prediction data by DTXSID",
+        "description": "return SEEM demographic prediction data for requested DTXSID",
         "operationId": "getDemoExpoPredictionByDtxsid",
         "parameters": [
           {
@@ -439,8 +439,8 @@
         "tags": [
           "Product Data Resource"
         ],
-        "summary": "Find product data by dtxsid",
-        "description": "return product data for requested dtxsid",
+        "summary": "Get product data by DTXSID",
+        "description": "return product data for requested DTXSID",
         "operationId": "getProductDataByDtxsid",
         "parameters": [
           {
@@ -483,8 +483,8 @@
         "tags": [
           "Product Data Resource"
         ],
-        "summary": "List all puc product data",
-        "description": "return all puc product data.",
+        "summary": "Get all product use categories",
+        "description": "return all product use category options. Products are organized by product use categories (PUCs): a controlled vocabulary developed by EPA that seeks to organize products in a way relevant for exposure modeling.",
         "operationId": "getProductDataPuc",
         "responses": {
           "200": {
@@ -515,8 +515,8 @@
         "tags": [
           "MMDB Resource"
         ],
-        "summary": "Get harmonized single-sample records by medium",
-        "description": "Specify the medium as part of the path.",
+        "summary": "Get Single Sample data by Medium",
+        "description": "return harmonized single sample records for requested medium",
         "operationId": "getHarmonizedSingleSampleDataByMedium",
         "parameters": [
           {
@@ -569,8 +569,8 @@
         "tags": [
           "MMDB Resource"
         ],
-        "summary": "Get harmonized single-sample records by dtxsid",
-        "description": "Specify the dtxsid as part of the path.",
+        "summary": "Get Single Sample data by DTXSID",
+        "description": "return harmonized single-sample records for requested DTXSID",
         "operationId": "getHarmonizedSingleSampleDataByDtxsid",
         "parameters": [
           {
@@ -613,7 +613,8 @@
         "tags": [
           "MMDB Resource"
         ],
-        "summary": "Get all searchable harmonized medium categories and their corresponding definitions",
+        "summary": "Get all Media options",
+        "description": "return all harmonized medium options and their corresponding definitions",
         "operationId": "getAllHarmonizedMedia",
         "responses": {
           "200": {
@@ -644,8 +645,8 @@
         "tags": [
           "MMDB Resource"
         ],
-        "summary": "Get harmonized aggregate records by medium",
-        "description": "Specify the medium as part of the path.",
+        "summary": "Get Aggregate data by Medium",
+        "description": "return harmonized aggregate records for requested medium",
         "operationId": "getHarmonizedAggregateDataByMedium",
         "parameters": [
           {
@@ -698,8 +699,8 @@
         "tags": [
           "MMDB Resource"
         ],
-        "summary": "Get harmonized aggregate records by dtxsid",
-        "description": "Specify the dtxsid as part of the path.",
+        "summary": "Get Aggregate data by DTXSID",
+        "description": "return harmonized aggregate records for requested DTXSID",
         "operationId": "getHarmonizedAggregateDataByDtxsid",
         "parameters": [
           {
@@ -742,7 +743,7 @@
         "tags": [
           "List Presence Resource"
         ],
-        "summary": "Produce list presence tags",
+        "summary": "Get List Presence Tags",
         "description": "return list presence tags",
         "operationId": "getListPresenceTags",
         "responses": {
@@ -774,8 +775,8 @@
         "tags": [
           "List Presence Resource"
         ],
-        "summary": "Find list presence data by dtxsid",
-        "description": "return list presence data for requested dtxsid",
+        "summary": "Get List Presence data by DTXSID",
+        "description": "return list presence data for requested DTXSID",
         "operationId": "getListPresenceByDtxsid",
         "parameters": [
           {
@@ -816,10 +817,10 @@
     "/exposure/httk/search/by-dtxsid/{dtxsid}": {
       "get": {
         "tags": [
-          "Httk Data Resource"
+          "httk Data Resource"
         ],
-        "summary": "Find httk data by dtxsid",
-        "description": "return httk data for requested dtxsid",
+        "summary": "Get httk data by DTXSID",
+        "description": "return httk data for requested DTXSID",
         "operationId": "getHttkDataByDtxsid",
         "parameters": [
           {
@@ -862,8 +863,8 @@
         "tags": [
           "Functional Use Resource"
         ],
-        "summary": "Find functional-use data by dtxsid",
-        "description": "return functional-use data for requested dtxsid",
+        "summary": "Get functional use data by DTXSID",
+        "description": "return functional use data for requested DTXSID",
         "operationId": "getFunctionalUseByDtxsid",
         "parameters": [
           {
@@ -886,7 +887,7 @@
                   "type": "string",
                   "oneOf": [
                     {
-                      "$ref": "#/components/schemas/FunctionalUseAll"
+                      "$ref": "#/components/schemas/FunctionalUse"
                     }
                   ]
                 }
@@ -906,8 +907,8 @@
         "tags": [
           "Functional Use Resource"
         ],
-        "summary": "Find functional-use probability by dtxsid",
-        "description": "return functional-use probability for requested dtxsid",
+        "summary": "Get functional use probability by DTXSID",
+        "description": "return functional use probability for requested DTXSID",
         "operationId": "getFunctionalUseProbabilityByDtxsid",
         "parameters": [
           {
@@ -950,8 +951,8 @@
         "tags": [
           "Functional Use Resource"
         ],
-        "summary": "Find functional-use categories",
-        "description": "return all functional-use categories",
+        "summary": "Get functional use categories",
+        "description": "return all functional use categories",
         "operationId": "getFunctionalUseCategory",
         "responses": {
           "200": {
@@ -962,7 +963,7 @@
                   "type": "string",
                   "oneOf": [
                     {
-                      "$ref": "#/components/schemas/FunctionalUseCategoryAll"
+                      "$ref": "#/components/schemas/FunctionalUseCategory"
                     }
                   ]
                 }
@@ -982,8 +983,8 @@
         "tags": [
           "CCD Data Resource"
         ],
-        "summary": "Find Product Use Category data by dtxsid",
-        "description": "return Product Use Category data for requested dtxsid",
+        "summary": "Get Product Use Category data by DTXSID",
+        "description": "return Product Use Category data for requested DTXSID",
         "operationId": "getProductUseCategoryByDtxsid",
         "parameters": [
           {
@@ -1026,8 +1027,8 @@
         "tags": [
           "CCD Data Resource"
         ],
-        "summary": "Find Production Volume data by dtxsid",
-        "description": "return Production Volume data for requested dtxsid",
+        "summary": "Get Production Volume data by DTXSID",
+        "description": "return Production Volume data for requested DTXSID",
         "operationId": "getProductionVolumeDataByDtxsid",
         "parameters": [
           {
@@ -1070,8 +1071,8 @@
         "tags": [
           "CCD Data Resource"
         ],
-        "summary": "Find Biomonitoring data by dtxsid with ccd projection",
-        "description": "return NHANES Inferences for requested dtxsidthere is an available projection for ccd exposure biomonitoring page:ccd-biomonitoringIf no projection is specified, the default CCDBiomonitoring data will be returned",
+        "summary": "Get Biomonitoring data by DTXSID with CCD projection",
+        "description": "return NHANES inferences data for requested DTXSID. There is an available projection aligned with what's available on the CCD Exposure Biomonitoring tab: ccd-biomonitoring. If no projection is specified, a default CCDBiomonitoring projection will be returned.",
         "operationId": "getBiomonitoringDataByDtxsid",
         "parameters": [
           {
@@ -1126,8 +1127,8 @@
         "tags": [
           "CCD Data Resource"
         ],
-        "summary": "Find General Use Keywords data by dtxsid",
-        "description": "return General Use Keywords data for requested dtxsid",
+        "summary": "Get General Use Keywords data by DTXSID",
+        "description": "return General Use Keywords data for requested DTXSID",
         "operationId": "getGeneralUseKeywordsByDtxsid",
         "parameters": [
           {
@@ -1170,8 +1171,8 @@
         "tags": [
           "CCD Data Resource"
         ],
-        "summary": "Find Reported Functional Use data by dtxsid",
-        "description": "return Reported Functional Use data for requested dtxsid",
+        "summary": "Get Reported Functional Use data by DTXSID",
+        "description": "return Reported Functional Use data for requested DTXSID",
         "operationId": "getReportedFunctionalUseByDtxsid",
         "parameters": [
           {
@@ -1214,8 +1215,8 @@
         "tags": [
           "CCD Data Resource"
         ],
-        "summary": "Find Chemical Weight Fractions data by dtxsid",
-        "description": "return Chemical Weight Fractions data for requested dtxsid",
+        "summary": "Get Chemical Weight Fractions data by DTXSID",
+        "description": "return Chemical Weight Fractions data for requested DTXSID",
         "operationId": "getChemicalWeightFractionsByDtxsid",
         "parameters": [
           {
@@ -1594,34 +1595,46 @@
           }
         }
       },
-      "FunctionalUseAll": {
+      "FunctionalUse": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "format": "int64"
           },
-          "functioncategory": {
-            "type": "string"
-          },
-          "reportedfunction": {
-            "type": "string"
-          },
           "dtxsid": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 0
           },
-          "docdate": {
-            "type": "string"
+          "datatype": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 0
           },
           "docid": {
             "type": "integer",
             "format": "int32"
           },
           "doctitle": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 0
           },
-          "datatype": {
-            "type": "string"
+          "docdate": {
+            "type": "string",
+            "maxLength": 25,
+            "minLength": 0
+          },
+          "reportedfunction": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 0
+          },
+          "functioncategory": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0
           }
         }
       },
@@ -2106,17 +2119,19 @@
           }
         }
       },
-      "FunctionalUseCategoryAll": {
+      "FunctionalUseCategory": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "format": "int64"
           },
-          "definition": {
-            "type": "string"
-          },
           "category": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0
+          },
+          "definition": {
             "type": "string"
           }
         }
@@ -2228,14 +2243,14 @@
           "median": {
             "type": "number"
           },
-          "hoverMsg": {
-            "type": "string"
-          },
           "upper95th": {
             "type": "number"
           },
           "lower95th": {
             "type": "number"
+          },
+          "hoverMsg": {
+            "type": "string"
           }
         }
       },
@@ -2355,7 +2370,7 @@
           },
           "sourceDownloadDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "productCount": {
             "type": "integer",
@@ -2364,13 +2379,13 @@
         }
       }
     },
-    "securitySchemes": {
-      "api_key": {
-        "type": "apiKey",
-        "description": "Each API call should have api_key, Contact author for getting the new api_key. ",
-        "name": "x-api-key",
-        "in": "header"
-      }
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "description": "Each API request requires an api_key. Contact the CTX API Admin to request an API Key.",
+                "name": "x-api-key",
+                "in": "header"
+            }
+        }
     }
-  }
 }
