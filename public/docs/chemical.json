@@ -8,7 +8,7 @@
     "servers": [
         {
             "url": "https://ctx-api-dev.ccte.epa.gov",
-            "description": "Staging Environment"
+            "description": "Development Environment"
         }
     ],
     "tags": [
