@@ -8,7 +8,7 @@
     "servers": [
         {
             "url": "https://comptox.epa.gov/ctx-api",
-            "description": "Staging Environment"
+            "description": "Production Environment"
         }
     ],
     "tags": [
