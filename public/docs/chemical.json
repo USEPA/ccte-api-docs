@@ -2828,17 +2828,6 @@
     },
     "components": {
         "schemas": {
-            "WikipediaLinkResponse": {
-                "type": "object",
-                "properties": {
-                    "dtxsid": {
-                        "type": "string"
-                    },
-                    "safetyUrl": {
-                        "type": "string"
-                    }
-                }
-            },
             "ChemicalSynonymAll": {
                 "type": "object",
                 "description": "Different types of synonyms for request dtxsid",
@@ -3292,20 +3281,6 @@
                     "error",
                     "masses"
                 ]
-            },
-            "GhsLinkResponse": {
-                "type": "object",
-                "properties": {
-                    "dtxsid": {
-                        "type": "string"
-                    },
-                    "isSafetyData": {
-                        "type": "boolean"
-                    },
-                    "safetyUrl": {
-                        "type": "string"
-                    }
-                }
             },
             "ChemicalFateBatchDto": {
                 "type": "object",
@@ -4270,21 +4245,6 @@
                         "type": "string"
                     },
                     "inchiString": {
-                        "type": "string"
-                    }
-                }
-            },
-            "ChemicalDetailAllIds": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "dtxcid": {
-                        "type": "string"
-                    },
-                    "dtxsid": {
                         "type": "string"
                     }
                 }
