@@ -39,62 +39,9 @@
         {
             "name": "Lit Search Data Resource",
             "description": "Collection of endpoints containing extra chemical data pertaining to literature and patents."
-        },
-        {
-            "name": "PubChem to GHS Classification Resource",
-            "description": "Collection of endpoints to check if GHS classification safety data in available in PubChem."
-        },
-        {
-            "name": "Wikipedia to GHS Classification Resource",
-            "description": "Collection of endpoints to check if GHS classification safety data is available on Wikipedia."
         }
     ],
     "paths": {
-        "/chemical/wikipedia/by-dtxsid/": {
-            "post": {
-                "tags": [
-                    "Wikipedia to GHS Classification Resource"
-                ],
-                "summary": "Check for link for a batch of DTXSIDs",
-                "description": "This endpoint will return Y if Wikipedia has GHS Safety data, otherwise N.",
-                "operationId": "byBatchDtxsid",
-                "requestBody": {
-                    "description": "JSON array of DSSTox Substance Identifiers",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "example": "[\"DTXSID7020182\",\"DTXSID9020112\"]"
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/WikipediaLinkResponse"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ]
-            }
-        },
         "/chemical/synonym/search/by-dtxsid/": {
             "post": {
                 "tags": [
@@ -441,51 +388,6 @@
                 ]
             }
         },
-        "/chemical/ghslink/to-dtxsid/": {
-            "post": {
-                "tags": [
-                    "PubChem to GHS Classification Resource"
-                ],
-                "summary": "Check for link for a batch of DTXSIDs",
-                "description": "This endpoint will return Y if Pubchem has GHS Safety data, otherwise N.",
-                "operationId": "byBatchDtxsid_1",
-                "requestBody": {
-                    "description": "JSON array of DSSTox Substance Identifiers",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "example": "[\"DTXSID7020182\",\"DTXSID9020112\"]"
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/GhsLinkResponse"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ]
-            }
-        },
         "/chemical/fate/search/by-dtxsid/": {
             "post": {
                 "tags": [
@@ -756,45 +658,6 @@
                                     "title": "Validation Error",
                                     "status": 400,
                                     "detail": "System supports requests of '${application.batch-size}' DTXSIDs at one time, '${application.batch-size+1}' are submitted."
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ]
-            }
-        },
-        "/chemical/wikipedia/by-dtxsid/{dtxsid}": {
-            "get": {
-                "tags": [
-                    "Wikipedia to GHS Classification Resource"
-                ],
-                "summary": "Check for link by DTXSID",
-                "description": "This endpoint will return Y if Wikipedia has GHS Safety data, otherwise N.",
-                "operationId": "byDtxsid",
-                "parameters": [
-                    {
-                        "name": "dtxsid",
-                        "in": "path",
-                        "description": "DSSTox Substance Identifier",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "DTXSID7020182"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/WikipediaLinkResponse"
                                 }
                             }
                         }
@@ -2218,45 +2081,6 @@
                 ]
             }
         },
-        "/chemical/ghslink/to-dtxsid/{dtxsid}": {
-            "get": {
-                "tags": [
-                    "PubChem to GHS Classification Resource"
-                ],
-                "summary": "Check for link by DTXSID",
-                "description": "This endpoint will return Y if Pubchem has GHS Safety data, otherwise N.",
-                "operationId": "byDtxsid_1",
-                "parameters": [
-                    {
-                        "name": "dtxsid",
-                        "in": "path",
-                        "description": "DSSTox Substance Identifier",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "DTXSID7020182"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GhsLinkResponse"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ]
-            }
-        },
         "/chemical/file/mol/search/by-dtxsid/{dtxsid}": {
             "get": {
                 "tags": [
@@ -3000,77 +2824,10 @@
                     }
                 ]
             }
-        },
-        "/chemical/all": {
-            "get": {
-                "tags": [
-                    "Chemical Details Resource"
-                ],
-                "summary": "Get all data",
-                "description": "return all chemical details. The next parameter allows pagination for retrieval, but retrieval is limited to batches of 1000 per request. Please consider downloading the DSSTOX database instead accessing this information via API.",
-                "operationId": "getAllChemicalDetails",
-                "parameters": [
-                    {
-                        "name": "next",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64",
-                            "default": 1
-                        }
-                    },
-                    {
-                        "name": "projection",
-                        "in": "query",
-                        "description": "Specifies if projection is used. Option: all-ids. If omitted, the default ChemicalDetailStandard2 data is returned.",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "string",
-                                    "oneOf": [
-                                        {
-                                            "$ref": "#/components/schemas/ChemicalDetailStandard2"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/ChemicalDetailAllIds"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ]
-            }
         }
     },
     "components": {
         "schemas": {
-            "WikipediaLinkResponse": {
-                "type": "object",
-                "properties": {
-                    "dtxsid": {
-                        "type": "string"
-                    },
-                    "safetyUrl": {
-                        "type": "string"
-                    }
-                }
-            },
             "ChemicalSynonymAll": {
                 "type": "object",
                 "description": "Different types of synonyms for request dtxsid",
@@ -3524,20 +3281,6 @@
                     "error",
                     "masses"
                 ]
-            },
-            "GhsLinkResponse": {
-                "type": "object",
-                "properties": {
-                    "dtxsid": {
-                        "type": "string"
-                    },
-                    "isSafetyData": {
-                        "type": "boolean"
-                    },
-                    "safetyUrl": {
-                        "type": "string"
-                    }
-                }
             },
             "ChemicalFateBatchDto": {
                 "type": "object",
@@ -4502,21 +4245,6 @@
                         "type": "string"
                     },
                     "inchiString": {
-                        "type": "string"
-                    }
-                }
-            },
-            "ChemicalDetailAllIds": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "dtxcid": {
-                        "type": "string"
-                    },
-                    "dtxsid": {
                         "type": "string"
                     }
                 }
