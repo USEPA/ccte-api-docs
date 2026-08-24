@@ -13,32 +13,44 @@
     ],
     "tags": [
         {
+      "name": "OPSIN Resource",
+      "description": "Collection of endpoints to return chemical data by Systematic IUPAC Name from EMBL-EBI's Open Parser for Systematic IUPAC Nomenclature (OPSIN)."
+    },
+    {
+      "name": "Lit Search Data Resource",
+      "description": "Collection of endpoints containing extra chemical data pertaining to literature and patents."
+    },
+    {
+      "name": "Chemical Search Resource",
+      "description": "Collection of endpoints for searching for chemicals across chemical names and synonyms. Search string options include starts-with, exact, or contains."
+    },
+    {
             "name": "Chemical File Resource",
-            "description": "Collection of endpoints for chemical structure information in mol and image (png format). This curated data is sourced from the US EPA's Distributed Structure-Searchable Toxicity (DSSTox) database."
+      "description": "Collection of endpoints for chemical structure information in mol, mrv and image (png or svg format). This curated data is sourced from the US EPA's Distributed Structure-Searchable Toxicity (DSSTox) database."
         },
         {
+      "name": "Chemical List Resource",
+      "description": "Collection of endpoints for chemical lists. This curated data is sourced from the US EPA's Distributed Structure-Searchable Toxicity (DSSTox) database."
+    },
+    {
             "name": "Chemical Details Resource",
             "description": "Collection of endpoints with chemical details. This curated data is sourced from the US EPA's Distributed Structure-Searchable Toxicity (DSSTox) database."
         },
         {
-            "name": "Chemical List Resource",
-            "description": "Collection of endpoints for chemical lists. This curated data is sourced from the US EPA's Distributed Structure-Searchable Toxicity (DSSTox) database."
+      "name": "PubChem to GHS Classification Resource",
+      "description": "Collection of endpoints to check if GHS classification safety data in available in PubChem."
         },
         {
             "name": "Chemical Property Resource",
             "description": "Collection of endpoints for experimental and predictive chemical properties. This curated data is sourced from the US EPA's Distributed Structure-Searchable Toxicity (DSSTox) database and the Toxicity Estimation Software Tool (TEST) suite of QSAR models."
         },
         {
-            "name": "Chemical Search Resource",
-            "description": "Collection of endpoints for searching for chemicals across chemical names and synonyms. Search string options include starts-with, exact, or contains."
-        },
-        {
             "name": "Chemical Synonym Resource",
             "description": "Collection of endpoints containing chemical synonyms. This curated data is sourced from the US EPA's Distributed Structure-Searchable Toxicity (DSSTox) database."
         },
         {
-            "name": "Lit Search Data Resource",
-            "description": "Collection of endpoints containing extra chemical data pertaining to literature and patents."
+      "name": "Wikipedia to GHS Classification Resource",
+      "description": "Collection of endpoints to check if GHS classification safety data is available on Wikipedia."
         }
     ],
     "paths": {
@@ -375,11 +387,13 @@
                             "application/json": {
                                 "schema": {
                                     "type": "array",
-                                    "items": {}
+                  "items": {
+
                                 }
                             }
                         }
                     }
+          }
                 },
                 "security": [
                     {
@@ -1514,6 +1528,132 @@
                 ]
             }
         },
+    "/chemical/opsin/to-smiles/{name}": {
+      "get": {
+        "tags": [
+          "OPSIN Resource"
+        ],
+        "summary": "Get SMILES by name",
+        "description": "return SMILES for given Systematic IUPAC Name.",
+        "operationId": "toSmiles",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Systematic IUPAC Name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "acetamide"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "SMILES String": {
+                    "description": "SMILES String",
+                    "value": "C(C)(=O)N"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/chemical/opsin/to-inchikey/{name}": {
+      "get": {
+        "tags": [
+          "OPSIN Resource"
+        ],
+        "summary": "Get InChIKey by name",
+        "description": "return InChIKey for given Systematic IUPAC Name.",
+        "operationId": "toInChIKey",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Systematic IUPAC Name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "acetamide"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "InChIKey": {
+                    "description": "InChIKey",
+                    "value": "DLFVBJFMPXGRIB-UHFFFAOYSA-N"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/chemical/opsin/to-inchi/{name}": {
+      "get": {
+        "tags": [
+          "OPSIN Resource"
+        ],
+        "summary": "Get InChI by name",
+        "description": "return InChI for given Systematic IUPAC Name.",
+        "operationId": "toInChI",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Systematic IUPAC Name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "acetamide"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "InChI": {
+                    "description": "InChI",
+                    "value": "InChI=1/C2H5NO/c1-2(3)4/h1H3,(H2,3,4)/f/h3H2"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
         "/chemical/msready/search/by-mass/{start}/{end}": {
             "get": {
                 "tags": [
@@ -1910,7 +2050,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "40CFR1164"
+            "example": "ANTMIC"
                     },
                     {
                         "name": "word",
@@ -1920,7 +2060,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "AMMONIA"
+            "example": "PHOSPHORIC ACID"
                     }
                 ],
                 "responses": {
@@ -1961,7 +2101,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "40CFR1164"
+            "example": "ANTMIC"
                     },
                     {
                         "name": "word",
@@ -1971,7 +2111,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "MONIA"
+            "example": "PHOSPHORIC ACID"
                     }
                 ],
                 "responses": {
@@ -2010,9 +2150,8 @@
                         "required": true,
                         "schema": {
                             "type": "string"
-                        },
-                        "example": "40CFR1164"
                     }
+          }
                 ],
                 "responses": {
                     "200": {
@@ -2081,6 +2220,80 @@
                 ]
             }
         },
+    "/chemical/file/mrv/search/by-dtxsid/{dtxsid}": {
+      "get": {
+        "tags": [
+          "Chemical File Resource"
+        ],
+        "summary": "Get mrv file by DTXSID",
+        "description": "return mrv file for given DTXSID",
+        "operationId": "mrvByDtxsid",
+        "parameters": [
+          {
+            "name": "dtxsid",
+            "in": "path",
+            "description": "DSSTox Substance Identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "DTXSID7020182"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/chemical/file/mrv/search/by-dtxcid/{dtxcid}": {
+      "get": {
+        "tags": [
+          "Chemical File Resource"
+        ],
+        "summary": "Get mrv file by DTXCID",
+        "description": "return mrv file for given DTXCID",
+        "operationId": "mrvByDtxcid",
+        "parameters": [
+          {
+            "name": "dtxcid",
+            "in": "path",
+            "description": "DSSTox Compound Identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "DTXCID505"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
         "/chemical/file/mol/search/by-dtxsid/{dtxsid}": {
             "get": {
                 "tags": [
@@ -2105,9 +2318,11 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "application/json": {}
+              "application/json": {
+
                         }
                     }
+          }
                 },
                 "security": [
                     {
@@ -2140,9 +2355,11 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "application/json": {}
+              "application/json": {
+
                         }
                     }
+          }
                 },
                 "security": [
                     {
@@ -2169,15 +2386,26 @@
                             "type": "string"
                         },
                         "example": 20182
+          },
+          {
+            "name": "Image Format",
+            "in": "query",
+            "description": "By default, .png image format is returned.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ImageFormat"
                     }
+          }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "content": {
-                            "image/png": {}
+              "application/json": {
+
                         }
                     }
+          }
                 },
                 "security": [
                     {
@@ -2204,15 +2432,26 @@
                             "type": "string"
                         },
                         "example": "DTXSID7020182"
+          },
+          {
+            "name": "Image Format",
+            "in": "query",
+            "description": "By default, .png image format is returned.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ImageFormat"
                     }
+          }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "content": {
-                            "image/png": {}
+              "application/json": {
+
                         }
                     }
+          }
                 },
                 "security": [
                     {
@@ -2239,15 +2478,26 @@
                             "type": "string"
                         },
                         "example": "DTXCID505"
+          },
+          {
+            "name": "Image Format",
+            "in": "query",
+            "description": "By default, .png image format is returned.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ImageFormat"
                     }
+          }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "content": {
-                            "image/png": {}
+              "application/json": {
+
                         }
                     }
+          }
                 },
                 "security": [
                     {
@@ -2256,6 +2506,53 @@
                 ]
             }
         },
+    "/chemical/file/image/generate": {
+      "get": {
+        "tags": [
+          "Chemical File Resource"
+        ],
+        "summary": "Get structure image for SMILES",
+        "description": "return structure image for given SMILES",
+        "operationId": "generateImageBySmiles",
+        "parameters": [
+          {
+            "name": "smiles",
+            "in": "query",
+            "description": "SMILES String",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "CC(C)(C1=CC=C(O)C=C1)C1=CC=C(O)C=C1"
+          },
+          {
+            "name": "Image Format",
+            "in": "query",
+            "description": "By default, .png image format is returned.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ImageFormat",
+              "default": "PNG"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
         "/chemical/fate/summary/search/by-dtxsid/{dtxsid}": {
             "get": {
                 "tags": [
@@ -2824,8 +3121,8 @@
                     }
                 ]
             }
-        }
-    },
+            }
+          },
     "components": {
         "schemas": {
             "ChemicalSynonymAll": {
@@ -3104,9 +3401,11 @@
                     },
                     "properties": {
                         "type": "object",
-                        "additionalProperties": {}
+            "additionalProperties": {
+
                     }
                 }
+        }
             },
             "ChemicalPropertyExperimental": {
                 "type": "object",
@@ -3302,9 +3601,13 @@
                     "propName": {
                         "type": "string"
                     },
-                    "experimentalFateData": {},
-                    "predictedFateData": {}
+          "experimentalFateData": {
+
+          },
+          "predictedFateData": {
+
                 }
+        }
             },
             "ExtraData": {
                 "type": "object",
@@ -3358,64 +3661,91 @@
                 "type": "object",
                 "description": "Standard attributes available for chemical details APIs",
                 "properties": {
-                    "preferredName": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "irisLink": {
                         "type": "string"
                     },
-                    "isMarkush": {
-                        "type": "boolean"
+          "genericSubstanceid": {
+            "writeOnly": true
                     },
-                    "id": {
+          "sourcesCount": {
                         "type": "integer",
                         "format": "int64"
                     },
-                    "hasStructureImage": {
+          "qcLevel": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "monoisotopicMass": {
+          "casrn": {
+            "type": "string"
+          },
+          "dtxcid": {
+            "type": "string"
+          },
+          "preferredName": {
+            "type": "string"
+          },
+          "molFormula": {
+            "type": "string"
+          },
+          "percentAssays": {
                         "type": "number",
                         "format": "double"
                     },
-                    "relatedStructureCount": {
+          "cpdataCount": {
                         "type": "integer",
                         "format": "int64"
                     },
-                    "wikipediaArticle": {
+          "activeAssays": {
+            "type": "integer",
+            "format": "int32"
+                    },
+          "pubmedCount": {
+            "type": "number",
+            "format": "double"
+          },
+          "dtxsid": {
                         "type": "string"
                     },
-                    "descriptorStringTsv": {
-                        "type": "string"
-                    },
-                    "relatedSubstanceCount": {
+          "compoundId": {
                         "type": "integer",
-                        "format": "int64"
+            "format": "int32"
                     },
-                    "genericSubstanceId": {
+          "pubchemCount": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "genericSubstanceid": {
-                        "writeOnly": true
-                    },
-                    "dtxcid": {
+          "toxcastSelect": {
                         "type": "string"
                     },
-                    "casrn": {
+          "qcLevelDesc": {
                         "type": "string"
                     },
-                    "dtxsid": {
+          "inchiString": {
                         "type": "string"
                     },
-                    "smiles": {
+          "inchikey": {
                         "type": "string"
                     },
-                    "qcLevel": {
+          "pubchemCid": {
                         "type": "integer",
                         "format": "int32"
                     },
                     "qcNotes": {
                         "type": "string"
                     },
+          "smiles": {
+            "type": "string"
+          },
+          "qsarReadySmiles": {
+            "type": "string"
+          },
+          "iupacName": {
+            "type": "string"
+          },
                     "isotope": {
                         "type": "integer",
                         "format": "int32"
@@ -3428,67 +3758,40 @@
                         "type": "integer",
                         "format": "int32"
                     },
-                    "toxcastSelect": {
+          "isMarkush": {
+            "type": "boolean"
+          },
+          "pprtvLink": {
                         "type": "string"
                     },
-                    "iupacName": {
+          "msReadySmiles": {
                         "type": "string"
                     },
-                    "activeAssays": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "cpdataCount": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "qsarReadySmiles": {
-                        "type": "string"
-                    },
-                    "qcLevelDesc": {
-                        "type": "string"
-                    },
-                    "molFormula": {
-                        "type": "string"
-                    },
-                    "pubchemCount": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "inchikey": {
-                        "type": "string"
-                    },
-                    "msReadySmiles": {
-                        "type": "string"
-                    },
-                    "compoundId": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "pubmedCount": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "sourcesCount": {
+          "relatedSubstanceCount": {
                         "type": "integer",
                         "format": "int64"
                     },
-                    "pubchemCid": {
+          "descriptorStringTsv": {
+                        "type": "string"
+                    },
+          "genericSubstanceId": {
+            "type": "integer",
+            "format": "int32"
+                    },
+          "hasStructureImage": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "inchiString": {
+          "wikipediaArticle": {
                         "type": "string"
                     },
-                    "pprtvLink": {
-                        "type": "string"
-                    },
-                    "irisLink": {
-                        "type": "string"
-                    },
-                    "percentAssays": {
+          "monoisotopicMass": {
                         "type": "number",
                         "format": "double"
+                    },
+          "relatedStructureCount": {
+                        "type": "integer",
+                        "format": "int64"
                     }
                 }
             },
@@ -3496,22 +3799,22 @@
                 "type": "object",
                 "description": "Attributes related to chemical identification for chemical details APIs",
                 "properties": {
-                    "preferredName": {
+          "casrn": {
                         "type": "string"
                     },
                     "dtxcid": {
                         "type": "string"
                     },
-                    "casrn": {
+          "preferredName": {
                         "type": "string"
                     },
                     "dtxsid": {
                         "type": "string"
                     },
-                    "iupacName": {
+          "inchikey": {
                         "type": "string"
                     },
-                    "inchikey": {
+          "iupacName": {
                         "type": "string"
                     }
                 }
@@ -3520,53 +3823,53 @@
                 "type": "object",
                 "description": "Attributes related to chemical structure for chemical details APIs",
                 "properties": {
-                    "preferredName": {
-                        "type": "string"
-                    },
                     "id": {
                         "type": "integer",
                         "format": "int64"
                     },
-                    "hasStructureImage": {
-                        "type": "integer",
-                        "format": "int32"
+          "msreadySmiles": {
+            "writeOnly": true
                     },
+          "casrn": {
+            "type": "string"
+          },
                     "dtxcid": {
                         "type": "string"
                     },
-                    "casrn": {
+          "preferredName": {
                         "type": "string"
                     },
                     "dtxsid": {
                         "type": "string"
                     },
-                    "smiles": {
+          "inchiString": {
                         "type": "string"
                     },
-                    "qsarReadySmiles": {
+          "inchikey": {
                         "type": "string"
                     },
-                    "inchikey": {
+          "smiles": {
                         "type": "string"
                     },
-                    "msReadySmiles": {
+          "qsarReadySmiles": {
                         "type": "string"
                     },
-                    "inchiString": {
+          "msReadySmiles": {
                         "type": "string"
                     },
-                    "msreadySmiles": {
-                        "writeOnly": true
+          "hasStructureImage": {
+            "type": "integer",
+            "format": "int32"
                     }
                 }
             },
             "CcdSynonymFlatProjection": {
                 "type": "object",
                 "properties": {
-                    "quality": {
+          "synonym": {
                         "type": "string"
                     },
-                    "synonym": {
+          "quality": {
                         "type": "string"
                     }
                 }
@@ -3574,23 +3877,13 @@
             "ChemicalSearchAll": {
                 "type": "object",
                 "properties": {
-                    "searchName": {
+          "casrn": {
                         "type": "string"
-                    },
-                    "preferredName": {
-                        "type": "string"
-                    },
-                    "isMarkush": {
-                        "type": "boolean"
-                    },
-                    "hasStructureImage": {
-                        "type": "integer",
-                        "format": "int32"
                     },
                     "dtxcid": {
                         "type": "string"
                     },
-                    "casrn": {
+          "preferredName": {
                         "type": "string"
                     },
                     "dtxsid": {
@@ -3599,12 +3892,22 @@
                     "smiles": {
                         "type": "string"
                     },
+          "isMarkush": {
+            "type": "boolean"
+          },
+          "searchName": {
+            "type": "string"
+          },
+          "searchValue": {
+            "type": "string"
+          },
                     "rank": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "searchValue": {
-                        "type": "string"
+          "hasStructureImage": {
+            "type": "integer",
+            "format": "int32"
                     }
                 }
             },
@@ -3619,33 +3922,31 @@
                         "type": "number",
                         "format": "float"
                     },
-                    "experimentalAverage": {
+          "predictedAverage": {
                         "type": "number",
                         "format": "float"
                     },
-                    "predictedAverage": {
+          "experimentalAverage": {
                         "type": "number",
                         "format": "float"
                     },
-                    "unit": {
-                        "type": "string"
-                    },
-                    "propName": {
-                        "type": "string"
-                    },
-                    "experimentalMax": {
+          "experimentalMin": {
                         "type": "number",
                         "format": "float"
                     },
-                    "predictedMedian": {
+          "predictedMax": {
                         "type": "number",
                         "format": "float"
                     },
-                    "predictedMax": {
+          "predictedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "experimentalMax": {
                         "type": "number",
                         "format": "float"
                     },
-                    "experimentalMin": {
+          "predictedMedian": {
                         "type": "number",
                         "format": "float"
                     },
@@ -3653,41 +3954,43 @@
                         "type": "number",
                         "format": "float"
                     },
-                    "predictedCount": {
-                        "type": "integer",
-                        "format": "int32"
+          "propName": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
                     }
                 }
             },
             "ChemicalPropertySummaryExperimental": {
                 "type": "object",
                 "properties": {
-                    "sourceDescription": {
+          "showLink": {
+            "type": "boolean"
+          },
+          "speciesLatin": {
                         "type": "string"
                     },
-                    "sourceName": {
+          "responseSite": {
                         "type": "string"
                     },
-                    "publicSourceUrl": {
+          "availability": {
                         "type": "string"
                     },
-                    "directUrl": {
+          "sourceDescription": {
                         "type": "string"
                     },
                     "propValue": {
                         "type": "number",
                         "format": "double"
                     },
-                    "responseSite": {
+          "directUrl": {
                         "type": "string"
                     },
-                    "availability": {
+          "publicSourceUrl": {
                         "type": "string"
                     },
-                    "showLink": {
-                        "type": "boolean"
-                    },
-                    "speciesLatin": {
+          "sourceName": {
                         "type": "string"
                     }
                 }
@@ -3790,9 +4093,12 @@
                         "format": "date-time"
                     },
                     "dtxsids": {
+            "type": "array",
+            "items": {
                         "type": "string"
                     }
                 }
+        }
             },
             "ImageFormat": {
                 "type": "string",
@@ -3815,15 +4121,17 @@
                     }
                 }
             },
-            "JsonNode": {},
+      "JsonNode": {
+
+      },
             "compact": {
                 "type": "object",
                 "description": "Minimum attributes for chemical details APIs",
                 "properties": {
-                    "preferredName": {
+          "casrn": {
                         "type": "string"
                     },
-                    "casrn": {
+          "preferredName": {
                         "type": "string"
                     },
                     "dtxsid": {
@@ -3835,80 +4143,97 @@
                 "type": "object",
                 "description": "All attributes available for chemical details APIs",
                 "properties": {
-                    "preferredName": {
-                        "type": "string"
-                    },
-                    "isMarkush": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "type": "integer",
                         "format": "int64"
                     },
-                    "atmosphericHydroxylationRate": {
+          "viscosityCpCptestPred": {
+            "writeOnly": true
+          },
+          "octanolWaterpartition": {
+            "writeOnly": true
+          },
+          "meltingPointDegctestPred": {
+            "writeOnly": true
+          },
+          "operaKmDayOperaPred": {
+            "writeOnly": true
+          },
+          "biodegredationFactorTestPred": {
+            "writeOnly": true
+          },
+          "vaporPressuremmhgTestPred": {
+            "writeOnly": true
+          },
+          "biodegredationHalfLifeDays": {
+            "writeOnly": true
+          },
+          "vaporPresureMmhgOperaPred": {
+            "writeOnly": true
+          },
+          "soilAbsorptionCoefficient": {
+            "writeOnly": true
+          },
+          "devtoxTestpred": {
+            "writeOnly": true
+          },
+          "soilAdsorptionCoefficient": {
                         "type": "number",
                         "format": "double"
                     },
+          "meltingPointDegcTestPred": {
+            "type": "number",
+            "format": "double"
+          },
                     "meltingPointDegcOperaPred": {
                         "type": "number",
                         "format": "double"
                     },
-                    "boilingPointDegcTestPred": {
+          "flashPointDegcTestPred": {
                         "type": "number",
                         "format": "double"
                     },
-                    "bioconcentrationFactorOperaPred": {
+          "octanolWaterPartition": {
                         "type": "number",
                         "format": "double"
                     },
-                    "boilingPointDegcOperaPred": {
+          "operaKmDaysOperaPred": {
                         "type": "number",
                         "format": "double"
                     },
-                    "amesMutagenicityTestPred": {
+          "boilingPointDegcTestPred": {
                         "type": "number",
                         "format": "double"
                     },
-                    "octanolAirPartitionCoeff": {
+          "waterSolubilityTest": {
                         "type": "number",
                         "format": "double"
                     },
-                    "biodegradationHalfLifeDays": {
+          "vaporPressureMmhgTestPred": {
                         "type": "number",
                         "format": "double"
                     },
-                    "hasStructureImage": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "monoisotopicMass": {
+          "thermalConductivity": {
                         "type": "number",
                         "format": "double"
                     },
-                    "relatedStructureCount": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "flashPointDegcTestPred": {
+          "biodegradationHalfLifeDays": {
                         "type": "number",
                         "format": "double"
                     },
-                    "wikipediaArticle": {
-                        "type": "string"
-                    },
-                    "thermalConductivity": {
+          "bioconcentrationFactorTestPred": {
                         "type": "number",
                         "format": "double"
                     },
-                    "octanolWaterPartition": {
+          "bioconcentrationFactorOperaPred": {
                         "type": "number",
                         "format": "double"
                     },
-                    "viscosityCpCpTestPred": {
+          "atmosphericHydroxylationRate": {
                         "type": "number",
                         "format": "double"
                     },
-                    "waterSolubilityTest": {
+          "boilingPointDegcOperaPred": {
                         "type": "number",
                         "format": "double"
                     },
@@ -3916,222 +4241,205 @@
                         "type": "number",
                         "format": "double"
                     },
-                    "descriptorStringTsv": {
-                        "type": "string"
+          "viscosityCpCpTestPred": {
+            "type": "number",
+            "format": "double"
                     },
-                    "operaKmDaysOperaPred": {
+          "vaporPressureMmhgOperaPred": {
                         "type": "number",
                         "format": "double"
                     },
-                    "relatedSubstanceCount": {
-                        "type": "integer",
-                        "format": "int64"
+          "octanolAirPartitionCoeff": {
+            "type": "number",
+            "format": "double"
                     },
                     "expocatMedianPrediction": {
                         "type": "string"
-                    },
-                    "genericSubstanceId": {
-                        "type": "integer",
-                        "format": "int32"
                     },
                     "waterSolubilityOpera": {
                         "type": "number",
                         "format": "double"
                     },
-                    "operaKmDayOperaPred": {
-                        "writeOnly": true
+          "amesMutagenicityTestPred": {
+            "type": "number",
+            "format": "double"
                     },
-                    "octanolWaterpartition": {
-                        "writeOnly": true
+          "sourcesCount": {
+            "type": "integer",
+            "format": "int64"
                     },
-                    "viscosityCpCptestPred": {
-                        "writeOnly": true
-                    },
-                    "dtxcid": {
-                        "type": "string"
+          "qcLevel": {
+            "type": "integer",
+            "format": "int32"
                     },
                     "casrn": {
                         "type": "string"
                     },
-                    "dtxsid": {
+          "dtxcid": {
                         "type": "string"
                     },
-                    "smiles": {
+          "preferredName": {
                         "type": "string"
                     },
-                    "stereo": {
+          "molFormula": {
                         "type": "string"
                     },
-                    "qcLevel": {
+          "percentAssays": {
+            "type": "number",
+            "format": "double"
+          },
+          "cpdataCount": {
+                        "type": "integer",
+            "format": "int64"
+                    },
+          "activeAssays": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "qcNotes": {
+          "pubmedCount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+          "dtxsid": {
                         "type": "string"
                     },
-                    "isotope": {
+          "compoundId": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "nhanes": {
-                        "type": "string"
-                    },
-                    "density": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "expocat": {
-                        "type": "string"
-                    },
-                    "vaporPressureMmhgOperaPred": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "soilAdsorptionCoefficient": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "meltingPointDegcTestPred": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "vaporPressureMmhgTestPred": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "bioconcentrationFactorTestPred": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "multicomponent": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "totalAssays": {
+          "pubchemCount": {
                         "type": "integer",
                         "format": "int32"
                     },
                     "toxcastSelect": {
                         "type": "string"
                     },
-                    "iupacName": {
+          "qcLevelDesc": {
                         "type": "string"
                     },
-                    "activeAssays": {
+          "inchiString": {
+            "type": "string"
+          },
+          "inchikey": {
+            "type": "string"
+          },
+          "pubchemCid": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "cpdataCount": {
-                        "type": "integer",
-                        "format": "int64"
+          "qcNotes": {
+            "type": "string"
                     },
-                    "qsarReadySmiles": {
+          "smiles": {
                         "type": "string"
                     },
-                    "qcLevelDesc": {
+          "qsarReadySmiles": {
                         "type": "string"
                     },
-                    "molFormula": {
+          "iupacName": {
                         "type": "string"
                     },
-                    "oralRatLd50Mol": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "surfaceTension": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "averageMass": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "pubchemCount": {
+          "isotope": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "inchikey": {
+          "stereo": {
                         "type": "string"
                     },
-                    "msReadySmiles": {
-                        "type": "string"
+          "multicomponent": {
+            "type": "integer",
+            "format": "int32"
                     },
-                    "compoundId": {
+          "totalAssays": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "hrFatheadMinnow": {
+          "averageMass": {
                         "type": "number",
                         "format": "double"
                     },
-                    "pubmedCount": {
-                        "type": "number",
-                        "format": "double"
+          "irisLink": {
+            "type": "string"
                     },
-                    "sourcesCount": {
-                        "type": "integer",
-                        "format": "int64"
+          "isMarkush": {
+            "type": "boolean"
                     },
-                    "pubchemCid": {
-                        "type": "integer",
-                        "format": "int32"
+          "pprtvLink": {
+            "type": "string"
                     },
-                    "inchiString": {
+          "msReadySmiles": {
                         "type": "string"
                     },
-                    "pkabOperaPred": {
+          "nhanes": {
+            "type": "string"
+          },
+          "surfaceTension": {
                         "type": "number",
                         "format": "double"
                     },
-                    "devtoxTestPred": {
+          "oralRatLd50Mol": {
                         "type": "number",
                         "format": "double"
                     },
-                    "pprtvLink": {
-                        "type": "string"
+          "hrFatheadMinnow": {
+            "type": "number",
+            "format": "double"
                     },
                     "hrDiphniaLc50": {
                         "type": "number",
                         "format": "double"
                     },
-                    "toxvalData": {
+          "expocat": {
                         "type": "string"
                     },
-                    "irisLink": {
+          "toxvalData": {
                         "type": "string"
                     },
                     "henrysLawAtm": {
                         "type": "number",
                         "format": "double"
                     },
-                    "percentAssays": {
+          "density": {
                         "type": "number",
                         "format": "double"
                     },
+          "pkabOperaPred": {
+            "type": "number",
+            "format": "double"
+          },
                     "pkaaOperaPred": {
                         "type": "number",
                         "format": "double"
                     },
-                    "devtoxTestpred": {
-                        "writeOnly": true
+          "devtoxTestPred": {
+            "type": "number",
+            "format": "double"
                     },
-                    "soilAbsorptionCoefficient": {
-                        "writeOnly": true
+          "relatedSubstanceCount": {
+            "type": "integer",
+            "format": "int64"
                     },
-                    "biodegredationHalfLifeDays": {
-                        "writeOnly": true
+          "descriptorStringTsv": {
+            "type": "string"
                     },
-                    "vaporPressuremmhgTestPred": {
-                        "writeOnly": true
+          "genericSubstanceId": {
+            "type": "integer",
+            "format": "int32"
                     },
-                    "meltingPointDegctestPred": {
-                        "writeOnly": true
+          "hasStructureImage": {
+            "type": "integer",
+            "format": "int32"
                     },
-                    "vaporPresureMmhgOperaPred": {
-                        "writeOnly": true
+          "wikipediaArticle": {
+            "type": "string"
                     },
-                    "biodegredationFactorTestPred": {
-                        "writeOnly": true
+          "monoisotopicMass": {
+            "type": "number",
+            "format": "double"
+          },
+          "relatedStructureCount": {
+            "type": "integer",
+            "format": "int64"
                     }
                 }
             },
@@ -4139,113 +4447,113 @@
                 "type": "object",
                 "description": "All attributes use for NTA Informatics Toolkit.",
                 "properties": {
-                    "preferredName": {
-                        "type": "string"
-                    },
-                    "monoisotopicMass": {
-                        "type": "number",
-                        "format": "double"
+          "cpDataCount": {
+            "writeOnly": true
                     },
                     "expocatMedianPrediction": {
                         "type": "string"
                     },
-                    "dtxcid": {
-                        "type": "string"
+          "sourcesCount": {
+            "type": "integer",
+            "format": "int64"
                     },
                     "casrn": {
                         "type": "string"
                     },
-                    "dtxsid": {
+          "dtxcid": {
                         "type": "string"
                     },
-                    "smiles": {
+          "preferredName": {
                         "type": "string"
                     },
-                    "nhanes": {
+          "molFormula": {
                         "type": "string"
                     },
-                    "expocat": {
-                        "type": "string"
+          "percentAssays": {
+            "type": "number",
+            "format": "double"
                     },
-                    "totalAssays": {
+          "cpdataCount": {
                         "type": "integer",
-                        "format": "int32"
+            "format": "int64"
                     },
                     "activeAssays": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "cpdataCount": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "molFormula": {
+          "dtxsid": {
                         "type": "string"
                     },
                     "inchikey": {
                         "type": "string"
                     },
-                    "msReadySmiles": {
+          "smiles": {
                         "type": "string"
                     },
-                    "sourcesCount": {
+          "totalAssays": {
                         "type": "integer",
-                        "format": "int64"
+            "format": "int32"
                     },
-                    "percentAssays": {
+          "msReadySmiles": {
+            "type": "string"
+          },
+          "nhanes": {
+            "type": "string"
+          },
+          "expocat": {
+            "type": "string"
+          },
+          "monoisotopicMass": {
                         "type": "number",
                         "format": "double"
-                    },
-                    "cpDataCount": {
-                        "writeOnly": true
                     }
                 }
             },
             "ChemicalDetailStandard2": {
                 "type": "object",
                 "properties": {
-                    "preferredName": {
-                        "type": "string"
-                    },
                     "id": {
                         "type": "integer",
                         "format": "int64"
                     },
-                    "monoisotopicMass": {
-                        "type": "number",
-                        "format": "double"
+          "qcLevel": {
+            "type": "integer",
+            "format": "int32"
                     },
                     "casrn": {
                         "type": "string"
                     },
+          "preferredName": {
+            "type": "string"
+          },
+          "molFormula": {
+            "type": "string"
+          },
                     "dtxsid": {
                         "type": "string"
                     },
-                    "smiles": {
+          "qcLevelDesc": {
                         "type": "string"
                     },
-                    "qcLevel": {
-                        "type": "integer",
-                        "format": "int32"
+          "inchiString": {
+            "type": "string"
                     },
-                    "iupacName": {
+          "inchikey": {
                         "type": "string"
                     },
-                    "qcLevelDesc": {
+          "smiles": {
                         "type": "string"
                     },
-                    "molFormula": {
+          "iupacName": {
                         "type": "string"
                     },
                     "averageMass": {
                         "type": "number",
                         "format": "double"
                     },
-                    "inchikey": {
-                        "type": "string"
-                    },
-                    "inchiString": {
-                        "type": "string"
+          "monoisotopicMass": {
+            "type": "number",
+            "format": "double"
                     }
                 }
             },

@@ -13,28 +13,28 @@
     ],
     "tags": [
         {
+      "name": "Analytical QC Resource",
+      "description": "Endpoint for Analytical QC data to inform the chemical's applicability domain for in vitro screening at the sample and substance level. These curated data sourced from US EPA's Toxicity Forecaster (ToxCast) invitrodb."
+    },
+    {
+      "name": "Bioactivity Model Resource",
+      "description": "Collection of endpoints for prediction results from ToxCast bioactivity models. The publications associated with the ToxCast Pathway Models are: 1) ESTROGEN: As described in Browne, et al (2015) DOI: 10.1021/acs.est.5b02641 and presented to December 2014 FIFRA SAP under EPA-HQ-OPP-2014-0614. 2) ANDROGEN: As described in Kleinstreuer et al (2017) 10.1021/acs.chemrestox.6b00347 and presented to November 2017 FIFRA SAP under EPA-HQ-OPP-2017-0214."
+    },
+    {
             "name": "Bioactivity Assay Resource",
             "description": "Collection of endpoints for assay annotations. Annotations describe who conducted the assay, what platform was used, what was being measured (raw readout), and how the measurement was interpreted (normalized component data). Assay annotations facilitate data interpretation by allowing users to flexibly aggregate and differentiate processed data. These curated data sourced from US EPA's Toxicity Forecaster (ToxCast) invitrodb."
         },
         {
+      "name": "CCD AOP Data Resource",
+      "description": "Collection of endpoints used to populate CompTox Chemicals Dashboard (CCD) Adverse Outcome Pathway (AOP) and Key Event (KE) links within the ToxCast Summary Grid. Curated mappings of AOPs and KEs for individual ToxCast assay endpoints are made available in ToxCast's invitrodb."
+    },
+    {
             "name": "Bioactivity Data Resource",
             "description": "Collection of endpoints with multiple-concentration targeted bioactivity screening data. These curated data sourced from US EPA's Toxicity Forecaster (ToxCast) invitrodb."
         },
         {
-            "name": "Bioactivity Model Resource",
-            "description": "Collection of endpoints for prediction results from ToxCast bioactivity models. The publications associated with the ToxCast Pathway Models are: 1) ESTROGEN: As described in Browne, et al (2015) DOI: 10.1021/acs.est.5b02641 and presented to December 2014 FIFRA SAP under EPA-HQ-OPP-2014-0614. 2) ANDROGEN: As described in Kleinstreuer et al (2017) 10.1021/acs.chemrestox.6b00347 and presented to November 2017 FIFRA SAP under EPA-HQ-OPP-2017-0214."
-        },
-        {
-            "name": "Analytical QC Resource",
-            "description": "Endpoint for Analytical QC data to inform the chemical's applicability domain for in vitro screening at the sample and substance level. These curated data sourced from US EPA's Toxicity Forecaster (ToxCast) invitrodb."
-        },
-        {
             "name": "Assay Name Search Resource",
             "description": "Collection of endpoints for searching by assay name. Search string options include starts-with, exact, or contains."
-        },
-        {
-            "name": "CCD AOP Data Resource",
-            "description": "Collection of endpoints used to populate CompTox Chemicals Dashboard (CCD) Adverse Outcome Pathway (AOP) and Key Event (KE) links within the ToxCast Summary Grid. Curated mappings of AOPs and KEs for individual ToxCast assay endpoints are made available in ToxCast's invitrodb."
         }
     ],
     "paths": {
@@ -280,7 +280,7 @@
                 "description": "return assay annotations for requested ToxCast assay component endpoint IDs (AEIDs)",
                 "operationId": "batchSearchAssayByAeid",
                 "requestBody": {
-                    "description": "JSON array of DSSTox Substance Identifiers",
+          "description": "JSON array of ToxCast assay component endpoint IDs (AEIDs)",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -1548,81 +1548,81 @@
                     "spid": {
                         "type": "string"
                     },
-                    "stkc": {
+          "m4id": {
+            "type": "integer",
+            "format": "int64"
+                    },
+          "npts": {
+            "type": "integer",
+            "format": "int32"
+                    },
+          "coff": {
                         "type": "number",
                         "format": "double"
                     },
-                    "respMin": {
+          "nconc": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxMed": {
                         "type": "number",
                         "format": "double"
                     },
-                    "maxMean": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "nrep": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "nconc": {
+          "nmedGtblPos": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "fitc": {
+          "modelType": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "actp": {
+          "stkc": {
                         "type": "number",
                         "format": "double"
                     },
-                    "m4id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "concMin": {
-                        "type": "number",
-                        "format": "double"
+          "mc5Param": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            }
                     },
                     "bmad": {
                         "type": "number",
                         "format": "double"
                     },
-                    "npts": {
-                        "type": "integer",
-                        "format": "int32"
+          "testedConcUnit": {
+            "type": "string"
                     },
-                    "chid": {
-                        "type": "integer",
-                        "format": "int32"
+          "mc6Param": {
+            "$ref": "#/components/schemas/Mc6Param"
                     },
-                    "casn": {
-                        "type": "string"
-                    },
-                    "maxMed": {
+          "respMin": {
                         "type": "number",
                         "format": "double"
                     },
-                    "chidRep": {
+          "fitc": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "hitc": {
+          "respMax": {
                         "type": "number",
                         "format": "double"
                     },
-                    "concMax": {
+          "maxMean": {
                         "type": "number",
                         "format": "double"
                     },
+          "actp": {
+            "type": "number",
+            "format": "double"
+          },
+          "casn": {
+            "type": "string"
+          },
                     "modl": {
                         "type": "string"
                     },
-                    "coff": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "respMax": {
+          "maxMedConc": {
                         "type": "number",
                         "format": "double"
                     },
@@ -1630,53 +1630,53 @@
                         "type": "integer",
                         "format": "int64"
                     },
-                    "aeid": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
                     "maxMeanConc": {
                         "type": "number",
                         "format": "double"
                     },
-                    "maxMedConc": {
+          "chidRep": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "concMin": {
                         "type": "number",
                         "format": "double"
-                    },
-                    "nmedGtblPos": {
-                        "type": "integer",
-                        "format": "int32"
                     },
                     "nmedGtblNeg": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "modelType": {
-                        "type": "integer",
-                        "format": "int32"
+          "nrep": {
+            "type": "number",
+            "format": "double"
                     },
-                    "mc4Param": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "number"
-                        }
+          "hitc": {
+            "type": "number",
+            "format": "double"
                     },
                     "stkcUnit": {
                         "type": "string"
                     },
-                    "mc6Param": {
-                        "$ref": "#/components/schemas/Mc6Param"
+          "mc3Param": {
+            "$ref": "#/components/schemas/Mc3Param"
                     },
-                    "mc5Param": {
+          "mc4Param": {
                         "type": "object",
                         "additionalProperties": {
                             "type": "number"
                         }
                     },
-                    "mc3Param": {
-                        "$ref": "#/components/schemas/Mc3Param"
+          "chid": {
+            "type": "integer",
+            "format": "int32"
                     },
-                    "testedConcUnit": {
-                        "type": "string"
+          "concMax": {
+            "type": "number",
+            "format": "double"
+          },
+          "aeid": {
+            "type": "integer",
+            "format": "int64"
                     }
                 }
             },
@@ -1786,188 +1786,188 @@
             "AssayAll": {
                 "type": "object",
                 "properties": {
-                    "assayDescs": {
-                        "writeOnly": true
+          "assayComponentName": {
+            "type": "string"
                     },
-                    "assayname": {
-                        "writeOnly": true
+          "assayComponentEndpointDesc": {
+            "type": "string"
                     },
-                    "asid": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "aid": {
-                        "type": "integer",
-                        "format": "int32"
+          "assayComponentEndpointName": {
+            "type": "string"
                     },
                     "acid": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "gene": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Gene"
-                        }
-                    },
-                    "tissue": {
+          "signalDirection": {
                         "type": "string"
                     },
-                    "assayComponentName": {
+          "burstAssay": {
+            "type": "integer",
+            "format": "int32"
+                    },
+          "cellShortName": {
                         "type": "string"
                     },
-                    "assayFormatTypeSub": {
-                        "type": "string"
-                    },
-                    "cellViabilityAssay": {
+          "organismId": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "keyPositiveControl": {
+          "assaySourceName": {
                         "type": "string"
                     },
-                    "assayFunctionType": {
+          "aid": {
+            "type": "integer",
+            "format": "int32"
+                    },
+          "assayFootprint": {
                         "type": "string"
                     },
-                    "assayComponentDesc": {
+          "cellFormat": {
                         "type": "string"
                     },
-                    "cellFreeComponentSource": {
+          "organism": {
                         "type": "string"
                     },
-                    "intendedTargetTypeSub": {
+          "assaySourceDesc": {
                         "type": "string"
                     },
-                    "intendedTargetFamily": {
+          "cellGrowthMode": {
                         "type": "string"
                     },
-                    "parameterReadoutType": {
+          "assayDesc": {
                         "type": "string"
                     },
-                    "contentReadoutType": {
+          "asid": {
+            "type": "integer",
+            "format": "int32"
+                    },
+          "timepointHr": {
+            "type": "number",
+            "format": "double"
+                    },
+          "assayDesignType": {
                         "type": "string"
                     },
-                    "technologicalTargetType": {
+          "keyAssayReagent": {
                         "type": "string"
                     },
-                    "intendedTargetFamilySub": {
+          "gene": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Gene"
+            }
+                    },
+          "citations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Citation"
+            }
+                    },
+          "assayFormatType": {
                         "type": "string"
                     },
-                    "biologicalProcessTarget": {
+          "tissue": {
                         "type": "string"
                     },
-                    "detectionTechnology": {
+          "dilutionSolvent": {
                         "type": "string"
                     },
-                    "assayDesignTypeSub": {
-                        "type": "string"
-                    },
-                    "intendedTargetType": {
-                        "type": "string"
-                    },
-                    "detectionTechnologyType": {
-                        "type": "string"
-                    },
-                    "keyAssayReagentType": {
-                        "type": "string"
-                    },
-                    "normalizedDataType": {
-                        "type": "string"
-                    },
-                    "assaySourceLongName": {
-                        "type": "string"
+          "assayList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssayList"
+            }
                     },
                     "aeid": {
                         "type": "integer",
                         "format": "int64"
                     },
-                    "assayComponentEndpointDesc": {
+          "assayComponentDesc": {
                         "type": "string"
                     },
-                    "assayComponentEndpointName": {
-                        "type": "string"
-                    },
-                    "organismId": {
+          "cellViabilityAssay": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "organism": {
+          "intendedTargetFamilySub": {
                         "type": "string"
                     },
-                    "burstAssay": {
-                        "type": "integer",
-                        "format": "int32"
+          "normalizedDataType": {
+            "type": "string"
                     },
-                    "signalDirection": {
+          "keyPositiveControl": {
                         "type": "string"
                     },
-                    "assayDesignType": {
+          "assayComponentTargetDesc": {
                         "type": "string"
                     },
-                    "keyAssayReagent": {
+          "assayFunctionType": {
                         "type": "string"
                     },
-                    "timepointHr": {
-                        "type": "number",
-                        "format": "double"
+          "intendedTargetType": {
+            "type": "string"
                     },
-                    "assayDesc": {
+          "intendedTargetTypeSub": {
                         "type": "string"
                     },
-                    "cellGrowthMode": {
+          "intendedTargetFamily": {
                         "type": "string"
                     },
-                    "assayFootprint": {
+          "contentReadoutType": {
                         "type": "string"
                     },
-                    "dilutionSolvent": {
+          "detectionTechnologyTypeSub": {
                         "type": "string"
                     },
-                    "assayList": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/AssayList"
-                        }
+          "biologicalProcessTarget": {
+            "type": "string"
                     },
-                    "citations": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Citation"
-                        }
+          "dilutionSolventPercentMax": {
+            "type": "number",
+            "format": "double"
                     },
-                    "cellFormat": {
+          "assayFormatTypeSub": {
                         "type": "string"
                     },
-                    "assaySourceName": {
+          "keyAssayReagentType": {
                         "type": "string"
                     },
-                    "assaySourceDesc": {
+          "cellFreeComponentSource": {
                         "type": "string"
                     },
-                    "assayFormatType": {
+          "technologicalTargetTypeSub": {
                         "type": "string"
                     },
-                    "cellShortName": {
+          "detectionTechnology": {
                         "type": "string"
                     },
-                    "assayName": {
+          "detectionTechnologyType": {
                         "type": "string"
                     },
-                    "assayComponentTargetDesc": {
+          "technologicalTargetType": {
                         "type": "string"
                     },
-                    "detectionTechnologyTypeSub": {
+          "assaySourceLongName": {
                         "type": "string"
                     },
-                    "technologicalTargetTypeSub": {
+          "assayDesignTypeSub": {
                         "type": "string"
                     },
-                    "dilutionSolventPercentMax": {
-                        "type": "number",
-                        "format": "double"
+          "parameterReadoutType": {
+            "type": "string"
                     },
+          "assayName": {
+            "type": "string"
+          },
                     "technologicalTargetTypes": {
                         "writeOnly": true
+          },
+          "assayDescs": {
+            "writeOnly": true
+          },
+          "assayname": {
+            "writeOnly": true
                     }
                 }
             },
@@ -2030,7 +2030,8 @@
                         "type": "string"
                     },
                     "geneSymbol": {
-                        "type": "string"
+            "type": "string",
+            "deprecated": true
                     },
                     "organismId": {
                         "type": "integer",
@@ -2110,9 +2111,11 @@
                     },
                     "properties": {
                         "type": "object",
-                        "additionalProperties": {}
+            "additionalProperties": {
+
                     }
                 }
+        }
             },
             "BioactivityModel": {
                 "type": "object",
@@ -2147,26 +2150,27 @@
             "SummaryByTissue": {
                 "type": "object",
                 "properties": {
-                    "chemicalName": {
-                        "type": "string"
-                    },
                     "dtxsid": {
                         "type": "string"
                     },
                     "tissue": {
                         "type": "string"
                     },
+          "maxMedConc": {
+            "type": "number",
+            "format": "float"
+          },
                     "intendedTargetFamily": {
                         "type": "string"
                     },
+          "continuousHitCall": {
+            "type": "number",
+            "format": "float"
+          },
                     "hitCall": {
                         "type": "string"
                     },
                     "ac50": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "logAC50": {
                         "type": "number",
                         "format": "float"
                     },
@@ -2178,13 +2182,12 @@
                         "type": "number",
                         "format": "float"
                     },
-                    "maxMedConc": {
+          "logAC50": {
                         "type": "number",
                         "format": "float"
                     },
-                    "continuousHitCall": {
-                        "type": "number",
-                        "format": "float"
+          "chemicalName": {
+            "type": "string"
                     }
                 }
             },
@@ -2283,15 +2286,12 @@
             "CcdSingleConcData": {
                 "type": "object",
                 "properties": {
-                    "endpointName": {
+          "dtxsid": {
                         "type": "string"
                     },
-                    "maxMedVal": {
+          "coff": {
                         "type": "number",
                         "format": "double"
-                    },
-                    "dtxsid": {
-                        "type": "string"
                     },
                     "bmad": {
                         "type": "number",
@@ -2304,38 +2304,45 @@
                         "type": "number",
                         "format": "double"
                     },
-                    "coff": {
-                        "type": "number",
-                        "format": "double"
-                    },
                     "s2id": {
                         "type": "integer",
                         "format": "int64"
                     },
+          "preferredName": {
+            "type": "string"
+          },
                     "aeid": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "preferredName": {
+          "endpointName": {
                         "type": "string"
+          },
+          "maxMedVal": {
+            "type": "number",
+            "format": "double"
                     }
                 }
             },
             "AssayEndpointsList": {
                 "type": "object",
                 "properties": {
-                    "aeid": {
-                        "type": "integer",
-                        "format": "int64"
+          "geneSymbol": {
+            "type": "string",
+            "deprecated": true
                     },
+          "officialSymbol": {
+            "type": "string"
+          },
                     "assayComponentEndpointDesc": {
                         "type": "string"
                     },
                     "assayComponentEndpointName": {
                         "type": "string"
                     },
-                    "geneSymbol": {
-                        "type": "string"
+          "aeid": {
+            "type": "integer",
+            "format": "int64"
                     },
                     "singleConcActive": {
                         "type": "string"
@@ -2827,169 +2834,173 @@
             "CcDAssayAnnotation": {
                 "type": "object",
                 "properties": {
-                    "assayDescs": {
-                        "writeOnly": true
-                    },
-                    "assayname": {
-                        "writeOnly": true
-                    },
-                    "tissue": {
+          "assayComponentName": {
                         "type": "string"
                     },
-                    "assayComponentName": {
+          "assayComponentEndpointDesc": {
                         "type": "string"
                     },
-                    "assayFormatTypeSub": {
+          "assayComponentEndpointName": {
                         "type": "string"
                     },
-                    "keyPositiveControl": {
+          "signalDirection": {
                         "type": "string"
                     },
-                    "assayFunctionType": {
+          "burstAssay": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cellShortName": {
                         "type": "string"
                     },
-                    "assayComponentDesc": {
+          "assaySourceName": {
                         "type": "string"
                     },
-                    "cellFreeComponentSource": {
+          "assayFootprint": {
                         "type": "string"
                     },
-                    "intendedTargetTypeSub": {
+          "cellFormat": {
                         "type": "string"
                     },
-                    "intendedTargetFamily": {
+          "organism": {
                         "type": "string"
                     },
-                    "parameterReadoutType": {
+          "assaySourceDesc": {
                         "type": "string"
                     },
-                    "contentReadoutType": {
+          "cellGrowthMode": {
                         "type": "string"
                     },
-                    "technologicalTargetType": {
+          "assayDesc": {
                         "type": "string"
                     },
-                    "intendedTargetFamilySub": {
+          "timepointHr": {
+            "type": "number",
+            "format": "double"
+          },
+          "assayDesignType": {
                         "type": "string"
                     },
-                    "biologicalProcessTarget": {
+          "keyAssayReagent": {
                         "type": "string"
                     },
-                    "detectionTechnology": {
+          "assayFormatType": {
                         "type": "string"
                     },
-                    "assayDesignTypeSub": {
+          "tissue": {
                         "type": "string"
                     },
-                    "intendedTargetType": {
+          "dilutionSolvent": {
                         "type": "string"
                     },
-                    "detectionTechnologyType": {
+          "aeid": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "assayComponentDesc": {
                         "type": "string"
                     },
-                    "keyAssayReagentType": {
+          "intendedTargetFamilySub": {
                         "type": "string"
                     },
                     "normalizedDataType": {
                         "type": "string"
                     },
-                    "assaySourceLongName": {
+          "keyPositiveControl": {
                         "type": "string"
                     },
-                    "aeid": {
-                        "type": "integer",
-                        "format": "int64"
+          "assayComponentTargetDesc": {
+            "type": "string"
                     },
-                    "assayComponentEndpointDesc": {
+          "assayFunctionType": {
                         "type": "string"
                     },
-                    "assayComponentEndpointName": {
+          "intendedTargetType": {
                         "type": "string"
                     },
-                    "organism": {
+          "intendedTargetTypeSub": {
                         "type": "string"
                     },
-                    "burstAssay": {
-                        "type": "integer",
-                        "format": "int32"
+          "intendedTargetFamily": {
+            "type": "string"
                     },
-                    "signalDirection": {
+          "contentReadoutType": {
                         "type": "string"
                     },
-                    "assayDesignType": {
+          "detectionTechnologyTypeSub": {
                         "type": "string"
                     },
-                    "keyAssayReagent": {
+          "biologicalProcessTarget": {
                         "type": "string"
                     },
-                    "timepointHr": {
+          "dilutionSolventPercentMax": {
                         "type": "number",
                         "format": "double"
                     },
-                    "assayDesc": {
+          "assayFormatTypeSub": {
                         "type": "string"
                     },
-                    "cellGrowthMode": {
+          "keyAssayReagentType": {
                         "type": "string"
                     },
-                    "assayFootprint": {
+          "cellFreeComponentSource": {
                         "type": "string"
                     },
-                    "dilutionSolvent": {
+          "technologicalTargetTypeSub": {
                         "type": "string"
                     },
-                    "cellFormat": {
+          "detectionTechnology": {
                         "type": "string"
                     },
-                    "assaySourceName": {
+          "detectionTechnologyType": {
                         "type": "string"
                     },
-                    "assaySourceDesc": {
+          "technologicalTargetType": {
                         "type": "string"
                     },
-                    "assayFormatType": {
+          "assaySourceLongName": {
                         "type": "string"
                     },
-                    "cellShortName": {
+          "assayDesignTypeSub": {
                         "type": "string"
                     },
-                    "assayName": {
+          "parameterReadoutType": {
                         "type": "string"
                     },
-                    "assayComponentTargetDesc": {
+          "assayName": {
                         "type": "string"
-                    },
-                    "detectionTechnologyTypeSub": {
-                        "type": "string"
-                    },
-                    "technologicalTargetTypeSub": {
-                        "type": "string"
-                    },
-                    "dilutionSolventPercentMax": {
-                        "type": "number",
-                        "format": "double"
                     },
                     "toxCastAssayDescription": {
                         "type": "string"
                     },
                     "technologicalTargetTypes": {
                         "writeOnly": true
+          },
+          "assayDescs": {
+            "writeOnly": true
+          },
+          "assayname": {
+            "writeOnly": true
                     }
                 }
             },
             "CcdAssayGene": {
                 "type": "object",
                 "properties": {
-                    "entrezGeneId": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
                     "geneSymbol": {
-                        "type": "string"
+            "type": "string",
+            "deprecated": true
                     },
                     "geneName": {
                         "type": "string"
                     },
+          "officialSymbol": {
+            "type": "string"
+          },
+          "entrezGeneId": {
+            "type": "integer",
+            "format": "int32"
+          },
                     "serviceEntrezGeneId": {
                         "writeOnly": true
                     }
@@ -2998,36 +3009,36 @@
             "CcdAssayCitation": {
                 "type": "object",
                 "properties": {
-                    "url": {
+          "author": {
                         "type": "string"
                     },
-                    "aeid": {
-                        "type": "integer",
-                        "format": "int64"
+          "citation": {
+            "type": "string"
                     },
-                    "assayComponentEndpointName": {
+          "otherId": {
                         "type": "string"
                     },
-                    "title": {
+          "otherSource": {
                         "type": "string"
                     },
-                    "citation": {
+          "doi": {
                         "type": "string"
                     },
-                    "otherSource": {
+          "pmid": {
                         "type": "string"
                     },
-                    "author": {
+          "url": {
                         "type": "string"
                     },
-                    "otherId": {
+          "assayComponentEndpointName": {
                         "type": "string"
                     },
-                    "doi": {
+          "title": {
                         "type": "string"
                     },
-                    "pmid": {
-                        "type": "string"
+          "aeid": {
+            "type": "integer",
+            "format": "int64"
                     }
                 }
             },
@@ -3040,34 +3051,34 @@
                     "description": {
                         "type": "string"
                     },
-                    "assayRunType": {
-                        "type": "string"
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
                     },
                     "levelApplied": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "orderId": {
-                        "type": "integer",
-                        "format": "int32"
+          "assayRunType": {
+            "type": "string"
                     }
                 }
             },
             "CcdReagents": {
                 "type": "object",
                 "properties": {
-                    "cultureOrAssay": {
-                        "type": "string"
-                    },
-                    "reagentType": {
-                        "type": "string"
-                    },
                     "reagentValue": {
                         "type": "string"
                     },
                     "orderId": {
                         "type": "integer",
                         "format": "int32"
+          },
+          "cultureOrAssay": {
+            "type": "string"
+          },
+          "reagentType": {
+            "type": "string"
                     }
                 }
             },

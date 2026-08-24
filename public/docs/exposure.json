@@ -13,12 +13,20 @@
   ],
   "tags": [
     {
+      "name": "List Presence Resource",
+      "description": "Collection of endpoints with list presence data, reflecting the occurrence of chemicals on lists present in publicly available documents (sourced from a variety of federal and state agencies and trade associations). These lists are tagged with List Presence Keywords (LPKs) which is a controlled vocabulary developed by EPA that describe broad use information for a chemical useful for general categorization of chemicals across uses, populations, and/or regulatory groups. These curated data are sourced from US EPA's Chemicals and Products Database (CPDat)."
+    },
+    {
+      "name": "CCD Data Resource",
+      "description": "Collection of endpoints used to populate CompTox Chemicals Dashboard (CCD) Exposure tabs."
+    },
+    {
       "name": "Functional Use Resource",
       "description": "Collection of endpoints with functional use data. Functional use describes a chemical's role in a product or process, which can help determine exposure pathways used to assess chemical exposure. These curated data are sourced from US EPA's Chemicals and Products Database (CPDat)."
     },
     {
-      "name": "List Presence Resource",
-      "description": "Collection of endpoints with list presence data, reflecting the occurrence of chemicals on lists present in publicly available documents (sourced from a variety of federal and state agencies and trade associations). These lists are tagged with List Presence Keywords (LPKs) which is a controlled vocabulary developed by EPA that describe broad use information for a chemical useful for general categorization of chemicals across uses, populations, and/or regulatory groups. These curated data are sourced from US EPA's Chemicals and Products Database (CPDat)."
+      "name": "MMDB Resource",
+      "description": "Collection of endpoints with harmonized data from the Multimedia Monitoring Database (MMDB) to inform on chemical presence in various media like air, water, soil, and human tissues."
     },
     {
       "name": "Product Data Resource",
@@ -35,14 +43,6 @@
     {
       "name": "General Exposure Prediction Resource",
       "description": "Collection of endpoints for general prediction data. SEEM (Systematic Empirical Evaluation of Models) is a framework developed by the US EPA to predict exposure to chemicals across the general population and demographic subsets of the US."
-    },
-    {
-      "name": "MMDB Resource",
-      "description": "Collection of endpoints with harmonized data from the Multimedia Monitoring Database (MMDB) to inform on chemical presence in various media like air, water, soil, and human tissues."
-    },
-    {
-      "name": "CCD Data Resource",
-      "description": "Collection of endpoints used to populate CompTox Chemicals Dashboard (CCD) Exposure tabs."
     }
   ],
   "paths": {
@@ -2234,15 +2234,6 @@
       "CCDBiomonitoringAll": {
         "type": "object",
         "properties": {
-          "label": {
-            "type": "string"
-          },
-          "dtxsid": {
-            "type": "string"
-          },
-          "median": {
-            "type": "number"
-          },
           "upper95th": {
             "type": "number"
           },
@@ -2250,6 +2241,15 @@
             "type": "number"
           },
           "hoverMsg": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "median": {
+            "type": "number"
+          },
+          "dtxsid": {
             "type": "string"
           }
         }
