@@ -1,25 +1,394 @@
-openapi: 3.0.1
+---
+openapi: 3.1.0
 info:
   title: Computational Toxicology and Exposure Data APIs - Bioactivity
-  description: >-
-    The Bioactivity APIs are part of a set of public computational toxicology
-    and exposure APIs and provide bioactivity data through a set of API
-    endpoints.
+  description: The Bioactivity APIs are part of a set of public computational toxicology
+    and exposure APIs and provide bioactivity data through a set of API endpoints.
   version: 1.0.0
 servers:
-  - url: https://api-ccte-stg.epa.gov
+  - url: https://ctx-api-stg.ccte.epa.gov
     description: Production Environment
 tags:
+  - name: Assay Search Resource
+    description: API endpoints for searching assays (starts-with, exact, contains.
   - name: Bioactivity Assay Resource
     description: API endpoints for collecting Assay annotations.
+  - name: Analytical QC Resource
+    description: API endpoints for Analytical QC data.
   - name: Bioactivity Data Resource
     description: API endpoints for collecting bioactivity data.
+  - name: Bioactivity AOP Data Resource
+    description: API endpoints for collecting bioactivity AOP data.
 paths:
-  /bioactivity/data/summary/search/by-aeid/{aeid}:
+  "/bioactivity/data/search/by-spid/":
+    post:
+      tags:
+        - Bioactivity Data Resource
+      summary: Find bioactivity data by batch of spids
+      description: return bioactivity data for requested spids.
+      operationId: batchSearchDataBySpid
+      requestBody:
+        description: JSON array of DSSTox Substance Identifier
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+            example: '["EPAPLT0232A03","TP0000311A04"]'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/BioactivityDataAll"
+      security:
+        - api_key: []
+  "/bioactivity/data/search/by-m4id/":
+    post:
+      tags:
+        - Bioactivity Data Resource
+      summary: Find bioactivity data by batch of m4ids
+      description: return bioactivity data for requested m4ids.
+      operationId: batchSearchDataByM4id
+      requestBody:
+        description: JSON array of DSSTox Substance Identifier
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+            example: '["1135145","394876"]'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/BioactivityDataAll"
+      security:
+        - api_key: []
+  "/bioactivity/data/search/by-dtxsid/":
+    post:
+      tags:
+        - Bioactivity Data Resource
+      summary: Find bioactivity data by batch of dtxsids
+      description: return bioactivity data for requested dtxsids.
+      operationId: batchSearchDataByDtxsid
+      requestBody:
+        description: JSON array of DSSTox Substance Identifier
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+            example: '["DTXSID9026974","DTXSID9020112"]'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/BioactivityDataAll"
+      security:
+        - api_key: []
+  "/bioactivity/data/search/by-aeid/":
+    post:
+      tags:
+        - Bioactivity Data Resource
+      summary: Find bioactivity data by batch of aeids
+      description: return bioactivity data for requested aeids.
+      operationId: batchSearchDataByAeid
+      requestBody:
+        description: JSON array of DSSTox Substance Identifier
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+            example: '["3032","755"]'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/BioactivityDataAll"
+      security:
+        - api_key: []
+  "/bioactivity/data/aed/search/by-dtxsid":
+    post:
+      tags:
+        - Bioactivity Data Resource
+        - bioactivity
+        - data
+      summary: Batch fetch AED data by DTXSIDs
+      description: Returns AED bioactivity data for a list of DTXSIDs
+      operationId: getAedDataForBatchDtxsids
+      requestBody:
+        description: List of DTXSIDs
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+            example: '["DTXSID7020182","DTXSID9020112"]'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/AedData"
+      security:
+        - api_key: []
+  "/bioactivity/assay/search/by-aeid/":
+    post:
+      tags:
+        - Bioactivity Assay Resource
+      summary: Find assay annotations by batch of aeids
+      description: return assay annotations for requested aeids.
+      operationId: batchSearchAssayByAeid
+      requestBody:
+        description: JSON array of DSSTox Substance Identifier
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+            example: '["111","3032"]'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/AssayAll"
+      security:
+        - api_key: []
+  "/bioactivity/search/start-with/{value}":
+    get:
+      tags:
+        - Assay Search Resource
+      summary: Search by starting value
+      description: 'NOTE: Search value needs to be URL encoded for synonyms'
+      operationId: assayStartWith
+      parameters:
+        - name: value
+          in: path
+          description: Starting characters for search value
+          required: true
+          schema:
+            type: string
+          examples:
+            Search Value:
+              description: Search Value
+              value: ATG_S
+        - name: top
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 500
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/SearchAssay"
+        '400':
+          description: Data not found.
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/ProblemDetail"
+      security:
+        - api_key: []
+  "/bioactivity/search/equal/{value}":
+    get:
+      tags:
+        - Assay Search Resource
+      summary: Search by exact value
+      description: 'NOTE: Search value needs to be URL encoded for synonyms'
+      operationId: assayEqual
+      parameters:
+        - name: value
+          in: path
+          description: Exact match of search value
+          required: true
+          schema:
+            type: string
+          examples:
+            Search Value:
+              description: Search Value
+              value: ATG_STAT3_CIS
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/SearchAssay"
+        '400':
+          description: Data not found.
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/ProblemDetail"
+      security:
+        - api_key: []
+  "/bioactivity/search/contain/{value}":
+    get:
+      tags:
+        - Assay Search Resource
+      summary: Search by substring value
+      description: 'NOTE: Search value needs to be URL encoded for synonyms'
+      operationId: assayContain
+      parameters:
+        - name: value
+          in: path
+          description: Substring of search word
+          required: true
+          schema:
+            type: string
+          examples:
+            Search Value:
+              description: Search Value
+              value: AT3_CIS
+            Synonym:
+              description: Synonym
+              value: razine
+        - name: top
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/SearchAssay"
+        '400':
+          description: Data not found.
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/ProblemDetail"
+      security:
+        - api_key: []
+  "/bioactivity/data/summary/search/by-tissue/":
     get:
       tags:
         - Bioactivity Data Resource
+        - bioactivity
+        - data
+      summary: Get summary by dtxsid
+      description: Return summary data for given dtxsid
+      operationId: summaryByDtxsidAndTissue
+      parameters:
+        - name: dtxsid
+          in: query
+          description: DSSTox Substance Identifier
+          required: true
+          schema:
+            type: string
+          example: DTXSID7024241
+        - name: tissue
+          in: query
+          description: Tissue of origin
+          required: true
+          schema:
+            type: string
+          example: liver
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/SummaryByTissue"
+      security:
+        - api_key: []
+  "/bioactivity/data/summary/search/by-dtxsid/{dtxsid}":
+    get:
+      tags:
+        - Bioactivity Data Resource
+        - bioactivity
+        - data
+      summary: Get summary by dtxsid
+      description: Return summary data for given dtxsid
+      operationId: summaryByDtxsid
+      parameters:
+        - name: dtxsid
+          in: path
+          description: DSSTox Substance Identifier
+          required: true
+          schema:
+            type: string
+          example: DTXSID9026974
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/ChemicalAgg"
+      security:
+        - api_key: []
+  "/bioactivity/data/summary/search/by-aeid/{aeid}":
+    get:
+      tags:
+        - Bioactivity Data Resource
+        - bioactivity
+        - data
       summary: Get summary by aeid
+      description: Return summary data for given aeid
       operationId: summaryByAeid
       parameters:
         - name: aeid
@@ -29,21 +398,26 @@ paths:
           schema:
             type: integer
             format: int32
-          example: 1386
+          example: 3032
       responses:
         '200':
           description: OK
           content:
-            application/hal+json:
+            application/json:
               schema:
-                $ref: '#/components/schemas/AssayListCount'
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/AssayListCount"
       security:
         - api_key: []
-  /bioactivity/data/search/by-spid/{spid}:
+  "/bioactivity/data/search/by-spid/{spid}":
     get:
       tags:
         - Bioactivity Data Resource
+        - bioactivity
+        - data
       summary: Get data by spid
+      description: Return data for given spid
       operationId: dataBySpid
       parameters:
         - name: spid
@@ -52,23 +426,26 @@ paths:
           required: true
           schema:
             type: string
-          example: spid
+          example: EPAPLT0232A03
       responses:
         '200':
           description: OK
           content:
-            application/hal+json:
+            application/json:
               schema:
                 type: array
                 items:
-                  type: object
+                  "$ref": "#/components/schemas/BioactivityDataAll"
       security:
         - api_key: []
-  /bioactivity/data/search/by-m4id/{m4id}:
+  "/bioactivity/data/search/by-m4id/{m4id}":
     get:
       tags:
         - Bioactivity Data Resource
+        - bioactivity
+        - data
       summary: Get data by m4id
+      description: Return single data row for given m4id
       operationId: dataByM4Id
       parameters:
         - name: m4id
@@ -78,21 +455,26 @@ paths:
           schema:
             type: integer
             format: int32
-          example: 392006
+          example: 1135145
       responses:
         '200':
           description: OK
           content:
-            application/hal+json:
+            application/json:
               schema:
-                $ref: '#/components/schemas/BioactivityDataBase'
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/BioactivityDataAll"
       security:
         - api_key: []
-  /bioactivity/data/search/by-dtxsid/{dtxsid}:
+  "/bioactivity/data/search/by-dtxsid/{dtxsid}":
     get:
       tags:
         - Bioactivity Data Resource
-      summary: Get data by dtxsid
+        - bioactivity
+        - data
+      summary: Get data by dtxsid with or without projection
+      description: Return data for given DTXSID
       operationId: dataByDtxsid
       parameters:
         - name: dtxsid
@@ -101,23 +483,35 @@ paths:
           required: true
           schema:
             type: string
-          example: DTXSID0021125
+          example: DTXSID7020182
+        - name: projection
+          in: query
+          description: 'Specifies if projection is used. Option: toxcast-summary-plot.
+          If omitted, the default BioactivityDataAll data is returned.'
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
           content:
-            application/hal+json:
+            application/json:
               schema:
                 type: array
                 items:
-                  type: object
+                  type: string
+                  oneOf:
+                    - "$ref": "#/components/schemas/BioactivityDataAll"
       security:
         - api_key: []
-  /bioactivity/data/search/by-aeid/{aeid}:
+  "/bioactivity/data/search/by-aeid/{aeid}":
     get:
       tags:
         - Bioactivity Data Resource
+        - bioactivity
+        - data
       summary: Get data by aeid
+      description: Return data for given aeid
       operationId: dataByAeid
       parameters:
         - name: aeid
@@ -127,23 +521,109 @@ paths:
           schema:
             type: integer
             format: int32
-          example: 1386
+          example: 3032
       responses:
         '200':
           description: OK
           content:
-            application/hal+json:
+            application/json:
               schema:
                 type: array
                 items:
-                  type: object
+                  "$ref": "#/components/schemas/BioactivityDataAll"
       security:
         - api_key: []
-  /bioactivity/assay/search/by-aeid/{aeid}:
+  "/bioactivity/data/aed/search/by-dtxsid/{dtxsid}":
+    get:
+      tags:
+        - Bioactivity Data Resource
+        - bioactivity
+        - data
+      summary: Get AED data by dtxsid
+      description: Returns AED data for given DTXSID
+      operationId: getAedDataByDtxsid
+      parameters:
+        - name: dtxsid
+          in: path
+          required: true
+          schema:
+            type: string
+          example: DTXSID5021209
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AedData"
+      security:
+        - api_key: []
+  "/bioactivity/assay/single-conc/search/by-aeid/{aeid}":
     get:
       tags:
         - Bioactivity Assay Resource
-      summary: Get annotation by aeid
+      summary: Get single conc data by aeid
+      operationId: singleConcDataByAeid
+      parameters:
+        - name: aeid
+          in: path
+          description: Numeric assay endpoint identifier
+          required: true
+          schema:
+            type: integer
+            format: int32
+          example: 3032
+        - name: projection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: single-conc
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/CcdSingleConcData"
+      security:
+        - api_key: []
+  "/bioactivity/assay/search/by-gene/{geneSymbol}":
+    get:
+      tags:
+        - Bioactivity Assay Resource
+      summary: Get assay endpoints list
+      operationId: assayEndpointsListByGene
+      parameters:
+        - name: geneSymbol
+          in: path
+          description: Gene Symbol
+          required: true
+          schema:
+            type: string
+          example: TUBA1A
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/AssayEndpointsList"
+      security:
+        - api_key: []
+  "/bioactivity/assay/search/by-aeid/{aeid}":
+    get:
+      tags:
+        - Bioactivity Assay Resource
+      summary: Get assay data by aeid with projections
+      description: 'Fetches assay data based on the specified projection. Available
+        projections: ccd-assay-annotation, ccd-assay-gene, ccd-assay-citations, ccd-assay-tcpl,
+        ccd-assay-reagents, assay-all. If no projection is specified, the default
+        full assay data will be returned.'
       operationId: assayByAeid
       parameters:
         - name: aeid
@@ -153,57 +633,1409 @@ paths:
           schema:
             type: integer
             format: int32
-          example: 1386
+          example: 3032
+        - name: projection
+          in: query
+          description: 'Specifies which projection to use. Options: ccd-assay-annotation,
+          ccd-assay-gene, ccd-assay-citations, ccd-assay-tcpl, ccd-assay-reagents,
+          assay-all. If omitted, the full assay data is returned.'
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
           content:
-            application/hal+json:
+            application/json:
               schema:
-                $ref: '#/components/schemas/AssayBase'
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/AssayAnnotation"
+                  - "$ref": "#/components/schemas/CcDAssayAnnotation"
+                  - "$ref": "#/components/schemas/CcdAssayGene"
+                  - "$ref": "#/components/schemas/CcdAssayCitation"
+                  - "$ref": "#/components/schemas/CcdTcplData"
+                  - "$ref": "#/components/schemas/CcdReagents"
+        '400':
+          description: Invalid projection type
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/ProblemDetail"
+        '404':
+          description: No data found for the given aeid
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/ProblemDetail"
       security:
         - api_key: []
-  /bioactivity/assay/:
+  "/bioactivity/assay/count":
+    get:
+      tags:
+        - Bioactivity Assay Resource
+      summary: Get count of all available assays
+      operationId: assayCount
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+      security:
+        - api_key: []
+  "/bioactivity/assay/chemicals/search/by-aeid/{aeid}":
+    get:
+      tags:
+        - Bioactivity Assay Resource
+      summary: Get list of DTXSIDs by aeid
+      operationId: chemicalsByAeid
+      parameters:
+        - name: aeid
+          in: path
+          description: Numeric assay endpoint identifier
+          required: true
+          schema:
+            type: integer
+            format: int32
+          example: 3032
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/BioactivityAgg"
+      security:
+        - api_key: []
+  "/bioactivity/assay/":
     get:
       tags:
         - Bioactivity Assay Resource
       summary: Get all assays
       operationId: allAssays
+      parameters:
+        - name: projection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: assay-all
       responses:
         '200':
           description: OK
           content:
-            application/hal+json:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/AssayAnnotation"
+      security:
+        - api_key: []
+  "/bioactivity/aop/search/by-toxcast-aeid/{toxcastAeid}":
+    get:
+      tags:
+        - Bioactivity AOP Data Resource
+        - aop
+        - bioactivity
+      summary: Get aop data by toxcast aeid
+      description: Return aop data for given toxcast aeid
+      operationId: dataByToxcastAeid
+      parameters:
+        - name: toxcastAeid
+          in: path
+          description: Toxcast Aeid
+          required: true
+          schema:
+            type: integer
+            format: int32
+          example: 63
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
               schema:
                 type: array
                 items:
-                  type: object
+                  "$ref": "#/components/schemas/AOP"
       security:
         - api_key: []
+  "/bioactivity/aop/search/by-event-number/{eventNumber}":
+    get:
+      tags:
+        - Bioactivity AOP Data Resource
+        - aop
+        - bioactivity
+      summary: Get aop data by event number
+      description: Return aop data for given event number
+      operationId: dataByEventNumber
+      parameters:
+        - name: eventNumber
+          in: path
+          description: Event Number
+          required: true
+          schema:
+            type: integer
+            format: int32
+          example: 18
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/AOP"
+      security:
+        - api_key: []
+  "/bioactivity/aop/search/by-entrez-gene-id/{entrezGeneId}":
+    get:
+      tags:
+        - Bioactivity AOP Data Resource
+        - aop
+        - bioactivity
+      summary: Get aop data by entrez gene id
+      description: Return aop data for given entrez gene id
+      operationId: dataByEntrezGeneId
+      parameters:
+        - name: entrezGeneId
+          in: path
+          description: Entrez Gene Id
+          required: true
+          schema:
+            type: integer
+            format: int32
+          example: 196
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/AOP"
+      security:
+        - api_key: []
+  "/bioactivity/analyticalqc/search/by-dtxsid/{dtxsid}":
+    get:
+      tags:
+        - Analytical QC Resource
+      summary: Get analytical QC data by DTXSID
+      operationId: findByDsstoxSubstanceId
+      parameters:
+        - name: dtxsid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful retrieval
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/AnalyticalQC"
+        '404':
+          description: Data not found
+          content:
+            application/json:
+              schema:
+                type: string
+                oneOf:
+                  - "$ref": "#/components/schemas/ProblemDetail"
 components:
   schemas:
+    BioactivityDataAll:
+      type: object
+      properties:
+        aeid:
+          type: integer
+          format: int64
+        maxMedConc:
+          type: number
+          format: double
+        nmedGtblPos:
+          type: integer
+          format: int32
+        nmedGtblNeg:
+          type: integer
+          format: int32
+        modelType:
+          type: integer
+          format: int32
+        stkcUnit:
+          type: string
+        testedConcUnit:
+          type: string
+        mc3Param:
+          "$ref": "#/components/schemas/Mc3Param"
+        mc4Param:
+          type: object
+          additionalProperties:
+            type: number
+        mc6Param:
+          "$ref": "#/components/schemas/Mc6Param"
+        maxMeanConc:
+          type: number
+          format: double
+        mc5Param:
+          type: object
+          additionalProperties:
+            type: number
+        chnm:
+          type: string
+        spid:
+          type: string
+        dtxsid:
+          type: string
+        casn:
+          type: string
+        bmad:
+          type: number
+          format: double
+        respMin:
+          type: number
+          format: double
+        respMax:
+          type: number
+          format: double
+        m4id:
+          type: integer
+          format: int64
+        chid:
+          type: integer
+          format: int32
+        actp:
+          type: number
+          format: double
+        nrep:
+          type: number
+          format: double
+        stkc:
+          type: number
+          format: double
+        chidRep:
+          type: integer
+          format: int32
+        maxMed:
+          type: number
+          format: double
+        hitc:
+          type: number
+          format: double
+        m5id:
+          type: integer
+          format: int64
+        modl:
+          type: string
+        maxMean:
+          type: number
+          format: double
+        concMax:
+          type: number
+          format: double
+        fitc:
+          type: integer
+          format: int32
+        coff:
+          type: number
+          format: double
+        concMin:
+          type: number
+          format: double
+        nconc:
+          type: integer
+          format: int32
+        npts:
+          type: integer
+          format: int32
+    Mc3Param:
+      type: object
+      properties:
+        conc:
+          type: array
+          items:
+            type: number
+        resp:
+          type: array
+          items:
+            type: number
+    Mc6Param:
+      type: object
+      properties:
+        flag:
+          type: array
+          items:
+            type: string
+        mc6MthdId:
+          type: array
+          items:
+            type: integer
+            format: int32
+    AedData:
+      type: object
+      properties:
+        dtxsid:
+          type: string
+        preferredName:
+          type: string
+        aeid:
+          type: integer
+          format: int32
+        aenm:
+          type: string
+        aedVal:
+          type: array
+          items:
+            type: number
+            format: double
+        aedType:
+          type: array
+          items:
+            type: string
+        httkModel:
+          type: array
+          items:
+            type: string
+        aedValUnit:
+          type: array
+          items:
+            type: string
+        httkVersion:
+          type: array
+          items:
+            type: string
+        potencyValType:
+          type: array
+          items:
+            type: string
+        invitrodbVersion:
+          type: array
+          items:
+            type: string
+        interindividualVarPerc:
+          type: array
+          items:
+            type: number
+            format: double
+    AssayAll:
+      type: object
+      properties:
+        dilutionSolventPercentMax:
+          type: number
+          format: double
+        assayComponentTargetDesc:
+          type: string
+        technologicalTargetTypeSub:
+          type: string
+        detectionTechnologyTypeSub:
+          type: string
+        assayName:
+          type: string
+        assayList:
+          type: array
+          items:
+            "$ref": "#/components/schemas/AssayList"
+        aeid:
+          type: integer
+          format: int64
+        assayComponentName:
+          type: string
+        assayComponentEndpointName:
+          type: string
+        assayComponentEndpointDesc:
+          type: string
+        intendedTargetTypeSub:
+          type: string
+        intendedTargetFamilySub:
+          type: string
+        detectionTechnologyType:
+          type: string
+        detectionTechnology:
+          type: string
+        assayFormatTypeSub:
+          type: string
+        assayFunctionType:
+          type: string
+        intendedTargetType:
+          type: string
+        normalizedDataType:
+          type: string
+        parameterReadoutType:
+          type: string
+        biologicalProcessTarget:
+          type: string
+        technologicalTargetType:
+          type: string
+        keyPositiveControl:
+          type: string
+        contentReadoutType:
+          type: string
+        assayDesignTypeSub:
+          type: string
+        cellViabilityAssay:
+          type: integer
+          format: int32
+        cellFreeComponentSource:
+          type: string
+        intendedTargetFamily:
+          type: string
+        keyAssayReagentType:
+          type: string
+        assaySourceLongName:
+          type: string
+        assayComponentDesc:
+          type: string
+        organism:
+          type: string
+        burstAssay:
+          type: integer
+          format: int32
+        cellShortName:
+          type: string
+        assayFootprint:
+          type: string
+        dilutionSolvent:
+          type: string
+        assayDesignType:
+          type: string
+        keyAssayReagent:
+          type: string
+        citations:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Citation"
+        timepointHr:
+          type: number
+          format: double
+        assayFormatType:
+          type: string
+        organismId:
+          type: integer
+          format: int32
+        assayDesc:
+          type: string
+        cellFormat:
+          type: string
+        assaySourceName:
+          type: string
+        assaySourceDesc:
+          type: string
+        signalDirection:
+          type: string
+        cellGrowthMode:
+          type: string
+        asid:
+          type: integer
+          format: int32
+        gene:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Gene"
+        aid:
+          type: integer
+          format: int32
+        tissue:
+          type: string
+        acid:
+          type: integer
+          format: int32
+    AssayList:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    Citation:
+      type: object
+      properties:
+        doi:
+          type: string
+        url:
+          type: string
+        pmid:
+          type: integer
+          format: int32
+        title:
+          type: string
+        author:
+          type: string
+        citation:
+          type: string
+        otherId:
+          type: string
+        citationId:
+          type: integer
+          format: int32
+        otherSource:
+          type: string
+    Gene:
+      type: object
+      properties:
+        geneId:
+          type: integer
+          format: int32
+        geneName:
+          type: string
+        description:
+          type: string
+        geneSymbol:
+          type: string
+        organismId:
+          type: integer
+          format: int32
+        trackStatus:
+          type: string
+        entrezGeneId:
+          type: integer
+          format: int32
+        officialSymbol:
+          type: string
+        officialFullName:
+          type: string
+        uniprotAccessionNumber:
+          type: string
+    SearchAssay:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        searchName:
+          type: string
+          maxLength: 50
+          minLength: 0
+        searchValue:
+          type: string
+          maxLength: 200
+          minLength: 0
+        searchValueDesc:
+          type: string
+        modifiedValue:
+          type: string
+      required:
+        - id
+    ProblemDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        properties:
+          type: object
+          additionalProperties: {}
+    SummaryByTissue:
+      type: object
+      properties:
+        intendedTargetFamily:
+          type: string
+        maxMedConc:
+          type: number
+          format: float
+        dtxsid:
+          type: string
+        tissue:
+          type: string
+        continuousHitCall:
+          type: number
+          format: float
+        cutOff:
+          type: number
+          format: float
+        ac50:
+          type: number
+          format: float
+        logAC50:
+          type: number
+          format: float
+        hitCall:
+          type: string
+        acc:
+          type: number
+          format: float
+        chemicalName:
+          type: string
+    ChemicalAgg:
+      type: object
+      properties:
+        dtxsid:
+          type: string
+          maxLength: 255
+          minLength: 0
+        activeMc:
+          type: integer
+          format: int32
+        totalMc:
+          type: integer
+          format: int32
+        activeSc:
+          type: integer
+          format: int32
+        totalSc:
+          type: integer
+          format: int32
+        cytotoxMedianRaw:
+          type: number
+          format: float
+        cytotoxMad:
+          type: number
+          format: float
+        globalMad:
+          type: number
+          format: float
+        cytotoxMedianLog:
+          type: number
+          format: float
+        cytotoxMedianUm:
+          type: number
+          format: float
+        cytotoxLowerUm:
+          type: number
+          format: float
+        cytotoxLowerLog:
+          type: number
+          format: float
+        ntested:
+          type: number
+          format: float
+        nhit:
+          type: number
+          format: float
     AssayListCount:
+      type: object
+      description: US EPA's Toxicity Forecaster (ToxCast) program makes invitro medium-
+        and high-throughput screening assay data publicly available for prioritization
+        and hazard characterization.The summary endpoint returns the number of active
+        hits and total multi- and single-concentration chemicals tested for specific
+        ‘aeids’. For multi-concentration data, a continuous hit call value greater
+        than or equal to 0.9 is considered active, whereas values less than 0.9 are
+        considered inactive. For single concentration data, the hit call value is
+        binary where 1 is active and 0 is inactive. Multiple samples of the same chemical
+        may be tested for a given assay endpoint, and all samples per endpoint are
+        reflected in these counts.
+      properties:
+        aeid:
+          type: integer
+          format: int32
+          description: Assay component endpoint ID
+        activeMc:
+          type: integer
+          format: int64
+          description: Number of active representative samples tested at multiple
+            concentrations per endpoint (aeid)
+        totalMc:
+          type: integer
+          format: int64
+          description: Total count of samples tested at multiple concentrations per
+            endpoint (aeid)
+        activeSc:
+          type: integer
+          format: int64
+          description: Number of active representative samples tested at single concentration
+            per endpoint (aeid)
+        totalSc:
+          type: integer
+          format: int64
+          description: Total count of samples tested at single concentration per endpoint
+            (aeid)
+    CcdSingleConcData:
+      type: object
+      properties:
+        preferredName:
+          type: string
+        aeid:
+          type: integer
+          format: int32
+        dtxsid:
+          type: string
+        casn:
+          type: string
+        bmad:
+          type: number
+          format: double
+        hitc:
+          type: number
+          format: double
+        s2id:
+          type: integer
+          format: int64
+        coff:
+          type: number
+          format: double
+        maxMedVal:
+          type: number
+          format: double
+        endpointName:
+          type: string
+    AssayEndpointsList:
+      type: object
+      properties:
+        geneSymbol:
+          type: string
+        assayComponentEndpointName:
+          type: string
+        assayComponentEndpointDesc:
+          type: string
+        multiConcActives:
+          type: string
+        getsingleConcActive:
+          type: string
+    AssayAnnotation:
+      type: object
+      description: 'US EPA''s Toxicity Forecaster (ToxCast) program makes invitro
+        medium- and high-throughput screening assay data publicly available for prioritization
+        and hazard characterization. Given ToxCast includes a heterogeneous set of
+        assays across a diverse biological space, annotations in the database help
+        flexibly aggregate and differentiate processed data. The definition of an
+        “assay” is, in ToxCast, broken into 4 assay elements: assay source: the vendor/origination
+        of the data, assay: the procedure to generate the component data, assay component:
+        the raw data readout(s), assay component endpoint: the normalized component
+        data. The assay element annotations are often short in a standardized format
+        or use a controlled term list. Assay” resource endpoints provide assay metadata
+        for specific or all invitrodb ‘aeids’ (assay endpoint ids). These include
+        annotations from invitrodb’s assay, assay_component, assay_component_endpoint,
+        assay_list, assay_source, and gene tables, all returned in a by-aeid format.
+        Regular ToxCast/invitrodb users may find it easier to use the tcpl R package,
+        which has integrated to make API data retrievable in a familiar format. See
+        the tcpl vignette regarding data retrieval via API for more information.'
+      properties:
+        aeid:
+          type: integer
+          format: int64
+          description: Assay component endpoint ID
+        assayComponentEndpointName:
+          type: string
+          description: Assay component endpoint name (abbreviated 'aenm' within the
+            package)
+          maxLength: 255
+          minLength: 0
+        assayComponentEndpointDesc:
+          type: string
+          description: Assay component endpoint description
+        assayFunctionType:
+          type: string
+          description: Description of targeted mechanism and the purpose of the analyzed
+            readout in relation to others from the same assay
+          maxLength: 255
+          minLength: 0
+        normalizedDataType:
+          type: string
+          description: Normalization approach for which the data is displayed
+          maxLength: 255
+          minLength: 0
+        burstAssay:
+          type: integer
+          format: int32
+          description: Indicator if endpoint is included in the burst distribution
+            (1) or not (0); Burst phenomenon can describe confounding activity, such
+            as cytotoxicity due to non-specific activation of many targets at certain
+            concentrations
+        keyPositiveControl:
+          type: string
+          description: Tested chemical sample expected to produce activity; Used to
+            assess assay validity
+          maxLength: 255
+          minLength: 0
+        signalDirection:
+          type: string
+          description: Directionality of raw data signals from assay (gain or loss);
+            Defines analysis direction
+          maxLength: 255
+          minLength: 0
+        intendedTargetType:
+          type: string
+          description: General group of intended targets measured
+          maxLength: 255
+          minLength: 0
+        intendedTargetTypeSub:
+          type: string
+          description: Specific subgroup of intended targets measured
+          maxLength: 255
+          minLength: 0
+        intendedTargetFamily:
+          type: string
+          description: Family of intended target measured; Populated on ToxCast chemical
+            activity plot within CompTox dashboard
+          maxLength: 255
+          minLength: 0
+        intendedTargetFamilySub:
+          type: string
+          description: Specific subfamily of intended target measured
+          maxLength: 255
+          minLength: 0
+        cellViabilityAssay:
+          type: integer
+          format: int32
+          description: Indicator of the impact of cytotoxicity in confounding (1)
+            or no cytotoxic impact (0)
+        acid:
+          type: integer
+          format: int32
+          description: Assay component ID
+        assayComponentName:
+          type: string
+          description: Assay component name (abbreviated 'acnm' within the package)
+          maxLength: 255
+          minLength: 0
+        assayComponentDesc:
+          type: string
+          description: Assay component description
+        assayComponentTargetDesc:
+          type: string
+          description: Assay component target description. Generally includes information
+            about mechanism of action with assay target, how disruption is detected,
+            or significance of target disruption.
+        parameterReadoutType:
+          type: string
+          description: Description of parameters measured
+          maxLength: 255
+          minLength: 0
+        assayDesignType:
+          type: string
+          description: General description of the biological or physical process is
+            translated into a detectable signal by assay mechanism
+          maxLength: 255
+          minLength: 0
+        assayDesignTypeSub:
+          type: string
+          description: Specific description of method through which a biological or
+            physical process is translated into a detectable signal measured
+          maxLength: 255
+          minLength: 0
+        biologicalProcessTarget:
+          type: string
+          description: General biological process being chemically disrupted
+          maxLength: 255
+          minLength: 0
+        detectionTechnologyType:
+          type: string
+          description: General description of assay platform or detection signals
+            measured
+          maxLength: 255
+          minLength: 0
+        detectionTechnologyTypeSub:
+          type: string
+          description: Description of signals measured in assay platform
+          maxLength: 255
+          minLength: 0
+        detectionTechnology:
+          type: string
+          description: Specific description of assay platform used
+          maxLength: 255
+          minLength: 0
+        keyAssayReagentType:
+          type: string
+          description: Type of critical reactant being measured
+          maxLength: 255
+          minLength: 0
+        keyAssayReagent:
+          type: string
+          description: Critical reactant measured
+          maxLength: 255
+          minLength: 0
+        technologicalTargetType:
+          type: string
+          description: General description of technological target measured in assay
+            platform
+          maxLength: 255
+          minLength: 0
+        technologicalTargetTypeSub:
+          type: string
+          description: Specific description of technological target measured in assay
+            platform
+          maxLength: 255
+          minLength: 0
+        aid:
+          type: integer
+          format: int32
+          description: Assay ID
+        assayName:
+          type: string
+          description: Assay name (abbreviated 'anm' within the package)
+          maxLength: 255
+          minLength: 0
+        assayDesc:
+          type: string
+          description: Assay description
+        timepointHr:
+          type: number
+          format: double
+          description: Treatment duration in hours
+        organismId:
+          type: integer
+          format: int32
+          description: NCBI taxonomic identifier, available here https://www.ncbi.nlm.nih.gov/taxonomy
+        organism:
+          type: string
+          description: Organism of origin
+          maxLength: 255
+          minLength: 0
+        ncbiTaxonId:
+          type: integer
+          format: int32
+        taxonName:
+          type: string
+          maxLength: 255
+          minLength: 0
+        commonName:
+          type: string
+          maxLength: 255
+          minLength: 0
+        lineage:
+          type: string
+          maxLength: 255
+          minLength: 0
+        tissue:
+          type: string
+          description: Tissue of origin
+          maxLength: 255
+          minLength: 0
+        cellFormat:
+          type: string
+          description: Description of cell format
+          maxLength: 255
+          minLength: 0
+        cellFreeComponentSource:
+          type: string
+          description: Description of source for targeted cell-free components
+          maxLength: 255
+          minLength: 0
+        cellShortName:
+          type: string
+          description: Abbreviation of cell line
+          maxLength: 255
+          minLength: 0
+        cellGrowthMode:
+          type: string
+          description: Cell growth modality
+          maxLength: 255
+          minLength: 0
+        assayFootprint:
+          type: string
+          description: Microtiter plate size
+          maxLength: 255
+          minLength: 0
+        assayFormatType:
+          type: string
+          description: General description of assay format
+          maxLength: 255
+          minLength: 0
+        assayFormatTypeSub:
+          type: string
+          description: Specific description of assay format
+          maxLength: 255
+          minLength: 0
+        contentReadoutType:
+          type: string
+          description: Description of well characteristics being measured
+          maxLength: 255
+          minLength: 0
+        dilutionSolvent:
+          type: string
+          description: Solvent used in sample dilution
+          maxLength: 255
+          minLength: 0
+        dilutionSolventPercentMax:
+          type: number
+          format: double
+          description: Maximum percent of dilution solvent used, from 0 to 1.
+        asid:
+          type: integer
+          format: int32
+          description: Assay source ID
+        assaySourceName:
+          type: string
+          description: Assay source name (typically an abbreviation of the assay_source_long_name,
+            abbreviated 'asnm' within the package)
+          maxLength: 255
+          minLength: 0
+        assaySourceLongName:
+          type: string
+          description: Full assay source name
+          maxLength: 255
+          minLength: 0
+        assaySourceDesc:
+          type: string
+          description: Assay source description
+          maxLength: 255
+          minLength: 0
+        gene:
+          type: array
+          description: JSON object containing gene mappings
+          items:
+            "$ref": "#/components/schemas/Gene"
+        assayList:
+          type: array
+          description: JSON object containing curated groupings of endpoints anchored
+            by use in CCTE publications and/or projects
+          items:
+            "$ref": "#/components/schemas/AssayList"
+        citations:
+          type: array
+          description: JSON object containing references to assay-specific publications
+            describing assay design or results
+          items:
+            "$ref": "#/components/schemas/Citation"
+        mc2Methods:
+          type: array
+          description: JSON object containing Level 2 Multi-concentration (MC2)
+          items:
+            "$ref": "#/components/schemas/Mc2Method"
+        mc3Methods:
+          type: array
+          description: JSON object containing Level 3 Multi-concentration (MC3) normalized
+            concentration-response data
+          items:
+            "$ref": "#/components/schemas/Mc3Method"
+        mc4Methods:
+          type: array
+          description: JSON object containing Level 4 Multi-concentration (MC4) All
+            Models Fitting Parameters
+          items:
+            "$ref": "#/components/schemas/Mc4Method"
+        mc5Methods:
+          type: array
+          description: JSON object containing Level 5 Multi-concentration (MC5) Winning
+            Model Fitting Parameters
+          items:
+            "$ref": "#/components/schemas/Mc5Method"
+        mc6Methods:
+          type: array
+          description: JSON object containing Level 6 Multi-concentration (MC6) Flags
+          items:
+            "$ref": "#/components/schemas/Mc6Method"
+        sc1Methods:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Sc1Method"
+        sc2Methods:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Sc2Method"
+    Mc2Method:
+      type: object
+      properties:
+        desc:
+          type: string
+        mc2_mthd:
+          type: string
+        exec_ordr:
+          type: integer
+          format: int32
+        mc2_mthd_id:
+          type: integer
+          format: int32
+    Mc3Method:
+      type: object
+      properties:
+        desc:
+          type: string
+        mc3_mthd:
+          type: string
+        mc3_mthd_id:
+          type: integer
+          format: int32
+    Mc4Method:
+      type: object
+      properties:
+        desc:
+          type: string
+        mc4_mthd:
+          type: string
+        mc4_mthd_id:
+          type: integer
+          format: int32
+    Mc5Method:
+      type: object
+      properties:
+        desc:
+          type: string
+        mc5_mthd:
+          type: string
+        mc5_mthd_id:
+          type: integer
+          format: int32
+    Mc6Method:
+      type: object
+      properties:
+        desc:
+          type: string
+        mc6_mthd:
+          type: string
+        mc6_mthd_id:
+          type: integer
+          format: int32
+    Sc1Method:
+      type: object
+      properties:
+        desc:
+          type: string
+        sc1_mthd:
+          type: string
+        sc1_mthd_id:
+          type: integer
+          format: int32
+    Sc2Method:
+      type: object
+      properties:
+        desc:
+          type: string
+        sc2_mthd:
+          type: string
+        sc2_mthd_id:
+          type: integer
+          format: int32
+    CcDAssayAnnotation:
+      type: object
+      properties:
+        dilutionSolventPercentMax:
+          type: number
+          format: double
+        assayComponentTargetDesc:
+          type: string
+        technologicalTargetTypeSub:
+          type: string
+        detectionTechnologyTypeSub:
+          type: string
+        assayName:
+          type: string
+        aeid:
+          type: integer
+          format: int64
+        assayComponentName:
+          type: string
+        assayComponentEndpointName:
+          type: string
+        assayComponentEndpointDesc:
+          type: string
+        intendedTargetTypeSub:
+          type: string
+        intendedTargetFamilySub:
+          type: string
+        detectionTechnologyType:
+          type: string
+        detectionTechnology:
+          type: string
+        assayFormatTypeSub:
+          type: string
+        assayFunctionType:
+          type: string
+        intendedTargetType:
+          type: string
+        normalizedDataType:
+          type: string
+        parameterReadoutType:
+          type: string
+        biologicalProcessTarget:
+          type: string
+        technologicalTargetType:
+          type: string
+        keyPositiveControl:
+          type: string
+        contentReadoutType:
+          type: string
+        assayDesignTypeSub:
+          type: string
+        cellFreeComponentSource:
+          type: string
+        intendedTargetFamily:
+          type: string
+        keyAssayReagentType:
+          type: string
+        assaySourceLongName:
+          type: string
+        assayComponentDesc:
+          type: string
+        organism:
+          type: string
+        burstAssay:
+          type: integer
+          format: int32
+        cellShortName:
+          type: string
+        assayFootprint:
+          type: string
+        dilutionSolvent:
+          type: string
+        assayDesignType:
+          type: string
+        keyAssayReagent:
+          type: string
+        timepointHr:
+          type: number
+          format: double
+        assayFormatType:
+          type: string
+        assayDesc:
+          type: string
+        cellFormat:
+          type: string
+        assaySourceName:
+          type: string
+        assaySourceDesc:
+          type: string
+        signalDirection:
+          type: string
+        cellGrowthMode:
+          type: string
+        tissue:
+          type: string
+        toxCastAssayDescription:
+          type: string
+    CcdAssayGene:
+      type: object
+      properties:
+        entrezGeneId:
+          type: integer
+          format: int32
+        geneSymbol:
+          type: string
+        geneName:
+          type: string
+    CcdAssayCitation:
+      type: object
+      properties:
+        url:
+          type: string
+        title:
+          type: string
+        aeid:
+          type: integer
+          format: int64
+        assayComponentEndpointName:
+          type: string
+        author:
+          type: string
+        otherId:
+          type: string
+        doi:
+          type: string
+        pmid:
+          type: string
+        citation:
+          type: string
+        otherSource:
+          type: string
+    CcdTcplData:
+      type: object
+      properties:
+        methodName:
+          type: string
+        orderId:
+          type: integer
+          format: int32
+        assayRunType:
+          type: string
+        levelApplied:
+          type: integer
+          format: int32
+        description:
+          type: string
+    CcdReagents:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          format: int32
+        cultureOrAssay:
+          type: string
+        reagentType:
+          type: string
+        reagentValue:
+          type: string
+    BioactivityAgg:
       type: object
       properties:
         aeid:
           type: integer
           format: int32
-        activeMc:
-          type: integer
-          format: int64
-        totalMc:
-          type: integer
-          format: int64
-        activeSc:
-          type: integer
-          format: int64
-        totalSc:
-          type: integer
-          format: int64
-    BioactivityDataBase:
+          description: Assay component endpoint ID
+        dtxsid:
+          type: string
+          description: Distributed Structure-Searchable Toxicity (DSSTox) id, also
+            known as DTXSID
+          maxLength: 255
+          minLength: 0
+    AOP:
       type: object
-    AssayBase:
+      properties:
+        toxcastAeid:
+          type: integer
+          format: int32
+        entrezGeneId:
+          type: integer
+          format: int32
+        eventNumber:
+          type: integer
+          format: int32
+        eventLink:
+          type: string
+        aopNumber:
+          type: integer
+          format: int32
+        aopLink:
+          type: string
+    AnalyticalQC:
       type: object
+      properties:
+        analyticalQcId:
+          type: integer
+          format: int64
+        dtxsid:
+          type: string
+        chnm:
+          type: string
+        spid:
+          type: string
+        qcLevel:
+          type: string
+        t0:
+          type: string
+        t4:
+          type: string
+        call:
+          type: string
+        annotation:
+          type: string
+        flags:
+          type: string
+        averageMass:
+          type: string
+        log10VaporPressureOperaPred:
+          type: string
+        logkowOctanolWaterOperaPred:
+          type: string
+        exportDate:
+          type: string
+          format: date
+        dataVersion:
+          type: string
+        porCaution:
+          type: string
     Link:
       type: object
       properties:
@@ -226,12 +2058,11 @@ components:
     Links:
       type: object
       additionalProperties:
-        $ref: '#/components/schemas/Link'
+        "$ref": "#/components/schemas/Link"
   securitySchemes:
     api_key:
       type: apiKey
-      description: >-
-        Each API call should have api_key, Contact author for getting the new
-        api_key.
+      description: 'Each API call should have api_key, Contact author for getting
+        the new api_key. '
       name: x-api-key
       in: header
